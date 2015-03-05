@@ -1160,13 +1160,16 @@ namespace NavigationDrawer
 			public const int logo = 2130837563;
 			
 			// aapt resource value: 0x7f02003c
-			public const int sample_dashboard_item_background = 2130837564;
+			public const int monoandroidsplash = 2130837564;
 			
 			// aapt resource value: 0x7f02003d
-			public const int TechEmblem = 2130837565;
+			public const int sample_dashboard_item_background = 2130837565;
 			
 			// aapt resource value: 0x7f02003e
-			public const int tile = 2130837566;
+			public const int TechEmblem = 2130837566;
+			
+			// aapt resource value: 0x7f02003f
+			public const int tile = 2130837567;
 			
 			static Drawable()
 			{
@@ -1744,8 +1747,8 @@ namespace NavigationDrawer
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f0b00eb
-			public const int AppTheme = 2131427563;
+			// aapt resource value: 0x7f0b00ec
+			public const int AppTheme = 2131427564;
 			
 			// aapt resource value: 0x7f0b0000
 			public const int Base_TextAppearance_AppCompat = 2131427328;
@@ -2074,6 +2077,9 @@ namespace NavigationDrawer
 			// aapt resource value: 0x7f0b0060
 			public const int Base_Widget_AppCompat_Toolbar_Button_Navigation = 2131427424;
 			
+			// aapt resource value: 0x7f0b00eb
+			public const int Mono_Android_Theme_Splash = 2131427563;
+			
 			// aapt resource value: 0x7f0b0061
 			public const int Platform_AppCompat = 2131427425;
 			
@@ -2284,11 +2290,11 @@ namespace NavigationDrawer
 			// aapt resource value: 0x7f0b00a6
 			public const int Theme_AppCompat_NoActionBar = 2131427494;
 			
-			// aapt resource value: 0x7f0b00ec
-			public const int Theme_Base = 2131427564;
-			
 			// aapt resource value: 0x7f0b00ed
-			public const int Theme_Sample = 2131427565;
+			public const int Theme_Base = 2131427565;
+			
+			// aapt resource value: 0x7f0b00ee
+			public const int Theme_Sample = 2131427566;
 			
 			// aapt resource value: 0x7f0b00a7
 			public const int ThemeOverlay_AppCompat = 2131427495;
@@ -2305,8 +2311,8 @@ namespace NavigationDrawer
 			// aapt resource value: 0x7f0b00ab
 			public const int ThemeOverlay_AppCompat_Light = 2131427499;
 			
-			// aapt resource value: 0x7f0b00ee
-			public const int Widget = 2131427566;
+			// aapt resource value: 0x7f0b00ef
+			public const int Widget = 2131427567;
 			
 			// aapt resource value: 0x7f0b00ac
 			public const int Widget_AppCompat_ActionBar = 2131427500;
@@ -2461,23 +2467,23 @@ namespace NavigationDrawer
 			// aapt resource value: 0x7f0b00de
 			public const int Widget_AppCompat_Toolbar_Button_Navigation = 2131427550;
 			
-			// aapt resource value: 0x7f0b00ef
-			public const int Widget_SampleContentContainer = 2131427567;
-			
-			// aapt resource value: 0x7f0b00f1
-			public const int Widget_SampleDashboard_Grid = 2131427569;
+			// aapt resource value: 0x7f0b00f0
+			public const int Widget_SampleContentContainer = 2131427568;
 			
 			// aapt resource value: 0x7f0b00f2
-			public const int Widget_SampleDashboard_Item = 2131427570;
-			
-			// aapt resource value: 0x7f0b00f4
-			public const int Widget_SampleDashboard_Item_Description = 2131427572;
+			public const int Widget_SampleDashboard_Grid = 2131427570;
 			
 			// aapt resource value: 0x7f0b00f3
-			public const int Widget_SampleDashboard_Item_Title = 2131427571;
+			public const int Widget_SampleDashboard_Item = 2131427571;
 			
-			// aapt resource value: 0x7f0b00f0
-			public const int Widget_SampleMessage = 2131427568;
+			// aapt resource value: 0x7f0b00f5
+			public const int Widget_SampleDashboard_Item_Description = 2131427573;
+			
+			// aapt resource value: 0x7f0b00f4
+			public const int Widget_SampleDashboard_Item_Title = 2131427572;
+			
+			// aapt resource value: 0x7f0b00f1
+			public const int Widget_SampleMessage = 2131427569;
 			
 			static Style()
 			{

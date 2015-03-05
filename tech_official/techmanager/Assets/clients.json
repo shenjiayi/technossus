@@ -1,0 +1,5 @@
+﻿{
+"names":["Dave", "Alice", "Steve", "John"],
+"companies":["Dell", "Apple", "SpaceX", "Google"],
+"emails":["dave@dell.com", "Alice@apple.com", "steve@spacex.net", "john@gmail.com"],
+}

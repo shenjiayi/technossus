@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System;
+using System.Linq;
 using System.Text;
 using System.Collections.Generic;
 using System.Threading;
-
+using System.Json;
 using Android.App;
 using Android.Content;
 using Android.Runtime;
@@ -15,7 +17,7 @@ using Android.OS;
 namespace NavigationDrawer
 {
 
-	[Activity (Label = "Login", MainLauncher = true)]
+	[Activity (Label = "Technossus", MainLauncher = true)]
 	public class MainActivity : Activity
 	{
 
@@ -48,15 +50,36 @@ namespace NavigationDrawer
 
 		private void ActLIikeRequest(string username, string password)
 		{
+			string response;
+			Boolean test = true;
+			System.IO.StreamReader strm = new System.IO.StreamReader (Assets.Open ("login.json"));
+			response = strm.ReadToEnd ();
+			var obj = JsonObject.Parse (response);
+			JsonArray un = (JsonArray) obj ["username"];
+			JsonArray pw = (JsonArray)obj ["password"];
+
+
 			//Thread.Sleep (3000);
-			if (username == "tech") {
-				Intent intent = new Intent (this, typeof(NavigationDrawerActivity));
-				this.StartActivity (intent);
-			} else {
-				FragmentTransaction transaction = FragmentManager.BeginTransaction ();
-				test simplepage = new test();
-				simplepage.Show (transaction, "hello world");
+			for(int i = 0; i < un.Count(); i++){
+				if (username == un.ElementAt (i)) {
+					if (password == pw.ElementAt (i)) {
+						test = false;
+						Intent intent = new Intent (this, typeof(NavigationDrawerActivity));
+						this.StartActivity (intent);
+					} 
+				}		//test = false;
+			} 
+
+			if (test == true) {
+				Toast.MakeText (this, "Invalid account! Please try again.", ToastLength.Long).Show ();
 			}
+			//FragmentTransaction transaction = FragmentManager.BeginTransaction ();
+			//test simplepage = new test ();
+			//simplepage.Show (transaction, "hello world");
+
+
+
+
 		}
 
 	}

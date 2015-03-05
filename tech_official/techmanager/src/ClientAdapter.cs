@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Json;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -29,6 +31,7 @@ namespace NavigationDrawer
 			_activity = a;
 
 			Filter = new CilentFilter(this);
+
 		}
 
 
@@ -50,6 +53,15 @@ namespace NavigationDrawer
 
 		public override View GetView (int position, View convertView, ViewGroup parent)
 		{
+			string response;
+			System.IO.StreamReader strm = new System.IO.StreamReader (_activity.Assets.Open ("clients.json"));
+			response = strm.ReadToEnd ();
+			var obj = JsonObject.Parse (response);
+			JsonArray names = (JsonArray) obj ["names"];
+			JsonArray companies = (JsonArray) obj ["companies"];
+			JsonArray emails = (JsonArray) obj ["emails"];
+
+
 			var view = convertView ?? _activity.LayoutInflater.Inflate (Resource.Layout.ClientLayout, parent,false);
 			var name = view.FindViewById<TextView> (Resource.Id.name);
 
@@ -57,9 +69,9 @@ namespace NavigationDrawer
 			var contactEmail = view.FindViewById<TextView> (Resource.Id.contactEmail);
 			var contactImage = view.FindViewById<ImageView> (Resource.Id.picture);
 
-			name.Text = _allclient [position].name;
-			contactName.Text = "Contact: "+ _allclient [position].contactName;
-			contactEmail.Text = "Email: " +_allclient [position].contactEmail;
+			name.Text = companies.ElementAt (position);//_allclient [position].name;
+			contactName.Text = "Contact: " + names.ElementAt (position);//_allclient [position].contactName;
+			contactEmail.Text = "Email: " + emails.ElementAt (position);//_allclient [position].contactEmail;
 
 			if (_allclient [position].photo == null) {
 
@@ -76,7 +88,7 @@ namespace NavigationDrawer
 			}
 			return view;
 		}
-			
+
 
 		public override client this[int position]
 		{
@@ -93,7 +105,7 @@ namespace NavigationDrawer
 			{
 				_adapter = adapter;
 			}
-				
+
 			protected override FilterResults PerformFiltering(ICharSequence constraint)
 			{
 				var returnObj = new FilterResults();
@@ -109,7 +121,7 @@ namespace NavigationDrawer
 					// It they are contained they are added to results.
 					results.AddRange(
 						_adapter._partial.Where(
-                            cilent => cilent.name.ToLower().Contains(constraint.ToString().ToLower())));
+							cilent => cilent.name.ToLower().Contains(constraint.ToString().ToLower())));
 				}
 
 				// Nasty piece of .NET to Java wrapping, be careful with this!

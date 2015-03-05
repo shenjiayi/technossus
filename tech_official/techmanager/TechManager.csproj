@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
+    <Reference Include="System.Json" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="Xamarin.Android.Support.v4">
       <HintPath>..\packages\Xamarin.Android.Support.v4.21.0.3.0\lib\MonoAndroid10\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
@@ -146,5 +149,10 @@
       <Version>21.0.3.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\clients.json" />
+    <AndroidAsset Include="Assets\project1.json" />
+    <AndroidAsset Include="Assets\login.json" />
   </ItemGroup>
 </Project>
