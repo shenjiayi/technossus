@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{856D6370-A907-4989-9DD1-8D28F2F5B4AD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>NavigationDrawer</RootNamespace>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <AssemblyName>NavigationDrawer</AssemblyName>
+    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <ConsolePause>false</ConsolePause>
+    <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <ConsolePause>false</ConsolePause>
+    <AndroidSupportedAbis>x86</AndroidSupportedAbis>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.21.0.3.0\lib\MonoAndroid10\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.21.0.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.RecyclerView">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.21.0.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\views\NavigationDrawerActivity.cs" />
+    <Compile Include="src\views\MainActivity.cs" />
+    <Compile Include="src\MenuAdapter.cs" />
+    <Compile Include="src\objects\employee.cs" />
+    <Compile Include="src\test.cs" />
+    <Compile Include="src\PeopleAdapter.cs" />
+    <Compile Include="src\fragments\ClientFragment.cs">
+    </Compile>
+    <Compile Include="src\fragments\PeopleFragment.cs" />
+    <Compile Include="src\fragments\ClientFragmentPartial.cs" />
+    <Compile Include="src\fragments\ProjectFragment.cs" />
+    <Compile Include="src\objects\client.cs" />
+    <Compile Include="src\objects\project.cs" />
+    <Compile Include="src\ClientAdapter.cs" />
+    <Compile Include="src\ProjectAdapter.cs" />
+    <Compile Include="src\fragments\ProjectDetailFragment.cs" />
+    <Compile Include="src\objects\post.cs" />
+    <Compile Include="src\fragments\PostFragment.cs" />
+    <Compile Include="src\PostAdapter.cs" />
+    <Compile Include="src\fragments\PeopleFragmentPartial.cs" />
+    <Compile Include="src\fragments\ProjectInfoFragment.cs" />
+    <Compile Include="src\fragments\ClientDetailFragment.cs" />
+    <Compile Include="src\fragments\PeopleDetailFragment.cs" />
+    <Compile Include="src\ObjectExtensions.cs" />
+    <Compile Include="src\models\PeopleModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\AboutAssets.txt" />
+    <None Include="Assets\AndroidManifest.xml" />
+    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\activity_navigation_drawer.xml" />
+    <AndroidResource Include="Resources\layout\drawer_list_item.xml" />
+    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\layout\Invalid.axml" />
+    <AndroidResource Include="Resources\layout\people.axml" />
+    <AndroidResource Include="Resources\menu\navigation_drawer.xml" />
+    <AndroidResource Include="Resources\values\activitycards-strings.xml" />
+    <AndroidResource Include="Resources\values\base-strings.xml" />
+    <AndroidResource Include="Resources\values\strings.xml" />
+    <AndroidResource Include="Resources\values\template-dimens.xml" />
+    <AndroidResource Include="Resources\values\template-styles.xml" />
+    <AndroidResource Include="Resources\values-sw600dp\template-dimens.xml" />
+    <AndroidResource Include="Resources\values-sw600dp\template-styles.xml" />
+    <AndroidResource Include="Resources\values-v11\template-styles.xml" />
+    <AndroidResource Include="Resources\values-v20\styles.xml" />
+    <AndroidResource Include="Resources\values-v21\template-styles.xml" />
+    <AndroidResource Include="Resources\drawable\action_search.png" />
+    <AndroidResource Include="Resources\drawable\drawer_shadow.9.png" />
+    <AndroidResource Include="Resources\drawable\ic_drawer.png" />
+    <AndroidResource Include="Resources\drawable\tile.9.png" />
+    <AndroidResource Include="Resources\drawable\logo.png" />
+    <AndroidResource Include="Resources\drawable\contactImage.png" />
+    <AndroidResource Include="Resources\drawable\sample_dashboard_item_background.9.png" />
+    <AndroidResource Include="Resources\layout\client.axml">
+      <DependentUpon>project.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_planet.xml" />
+    <AndroidResource Include="Resources\layout\project.axml" />
+    <AndroidResource Include="Resources\drawable\ic_launcher_tcube.png" />
+    <AndroidResource Include="Resources\drawable\Background.png" />
+    <AndroidResource Include="Resources\layout\post.axml" />
+    <AndroidResource Include="Resources\layout\ProjectInfo.axml" />
+    <AndroidResource Include="Resources\layout\EmployeeLayout.axml" />
+    <AndroidResource Include="Resources\layout\PostLayout.axml" />
+    <AndroidResource Include="Resources\layout\ProjectLayout.axml" />
+    <AndroidResource Include="Resources\layout\ClientLayout.axml" />
+    <AndroidResource Include="Resources\layout\ClientDetail.axml" />
+    <AndroidResource Include="Resources\layout\PeopleDetail.axml" />
+    <AndroidResource Include="Resources\drawable\TechEmblem.png" />
+    <AndroidResource Include="Resources\drawable\ic_launcher2.png" />
+    <AndroidResource Include="Resources\drawable\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="xamandroidsupportv4-18">
+      <Version>21.0.3.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="xamandroidsupportv7appcompat">
+      <Version>21.0.3.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="xamandroidsupportv7recyclerview">
+      <Version>21.0.3.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/background"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <RelativeLayout
+        android:layout_centerVertical="true"
+        android:paddingLeft="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:scaleType="fitXY"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/picture" />
+        <TextView
+            android:text="Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:id="@+id/name"
+            android:layout_toRightOf="@+id/picture"
+            android:textColor="#ffffff" />
+        <TextView
+            android:text="available"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/available"
+            android:layout_toRightOf="@+id/picture"
+            android:layout_below="@+id/name"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+</RelativeLayout>

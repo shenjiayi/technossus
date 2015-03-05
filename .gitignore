@@ -1,0 +1,7 @@
+*.txt
+*.pdb
+*.dll
+tech_official/techmanager/bin/Debug/**/*
+tech_official/techmanager/obj/Debug/**/*
+tech_official/packages/repositories.config
+tech_official/techManager.userprefs

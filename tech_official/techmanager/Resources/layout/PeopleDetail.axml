@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="100"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:text="People Name:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/PeopleName"
+        android:layout_weight="10"
+        android:textSize="50px"
+        android:textColor="#ffffff" />
+    <TextView
+        android:text="Technology:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Technology"
+        android:layout_weight="10"
+        android:textSize="50px"
+        android:textColor="#ffffff" />
+    <TextView
+        android:text="Available Date:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Available"
+        android:layout_weight="10"
+        android:textSize="50px"
+        android:textColor="#ffffff" />
+</LinearLayout>

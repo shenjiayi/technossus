@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:weightSum="100"
+    android:background="#303030">
+    <ImageView
+        android:layout_width="300.3dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:id="@+id/Imglogo"
+        android:paddingRight="40dp"
+        android:paddingBottom="0dp"
+        android:paddingLeft="40dp"
+        android:scaleType="center"
+        android:maxHeight="20dp"
+        android:paddingTop="00dp"
+        android:src="@drawable/TechEmblem"
+        android:maxWidth="30dp"
+        android:layout_marginLeft="40dp" />
+    <TextView
+        android:text="Username:"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TxtUsername"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:textColor="#ffffff" />
+    <EditText
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/InputUsername"
+        android:layout_weight="5"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:textColor="#ffffff" />
+    <TextView
+        android:text="Password:"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TxtPassword"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:textColor="#ffffff" />
+    <EditText
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/InputPassword"
+        android:layout_weight="5"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:textColor="#ffffff" />
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/switch1"
+        android:text="Remember me: "
+        android:layout_weight="5"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:checked="true"
+        android:textColor="#ffffff"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp" />
+    <Button
+        android:text="Log in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/BtnLogin"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:background="#f74b4b"
+        android:linksClickable="true"
+        android:textColor="#FFFFFF" />
+</LinearLayout>
