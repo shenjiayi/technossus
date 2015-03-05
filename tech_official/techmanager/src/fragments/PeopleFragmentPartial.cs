@@ -21,24 +21,18 @@ namespace NavigationDrawer
 {
 	public class PeopleFragmentPartial:Android.App.ListFragment
 	{
-        private PeopleModel model;
-
 
 		public const string ARG_NUMBER = "id_number";
-        List<employee> allemployee;
+
+        private List<employee> allemployee = new List<employee> () {
+            new employee (1, null, "Jone", "2014/3/2","Java,C++,Python"), new employee (2, null, "James", "2014/4/6","Java,C++,Python"), new employee (3, null, "Kate", "2015/3/1","Java,C++,Python"),
+            new employee (4, null, "Smith", "2015/3/1","Java,C++,Python")
+        };
 
 		public PeopleFragmentPartial ()
 		{
 			// Empty constructor required for fragment subclasses
-            model = null;
 		}
-
-        // TESTING
-        public PeopleFragmentPartial(PeopleModel model)
-        {
-            this.model = model;
-            allemployee = model.Search(-1, null, null, "JAVA");
-        }
 
 		public static Fragment NewInstance (int position)
 		{

@@ -83,10 +83,8 @@
     <Compile Include="src\fragments\ClientDetailFragment.cs" />
     <Compile Include="src\fragments\PeopleDetailFragment.cs" />
     <Compile Include="src\ObjectExtensions.cs" />
-    <Compile Include="src\models\PeopleModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\AboutAssets.txt" />
     <None Include="Assets\AndroidManifest.xml" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="packages.config" />
@@ -134,9 +132,6 @@
     <AndroidResource Include="Resources\drawable\TechEmblem.png" />
     <AndroidResource Include="Resources\drawable\ic_launcher2.png" />
     <AndroidResource Include="Resources\drawable\ic_launcher.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\models\" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="xamandroidsupportv4-18">

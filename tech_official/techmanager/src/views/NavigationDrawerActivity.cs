@@ -29,10 +29,6 @@ namespace NavigationDrawer
 		private string mDrawerTitle;
 		private String[] mMenuTitles;
 
-		// TEST DATA
-		private PeopleModel peopleModel;
-
-
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
 
@@ -67,12 +63,7 @@ namespace NavigationDrawer
 			mDrawerLayout.SetDrawerListener (mDrawerToggle);
 			if (savedInstanceState == null) //first launch
 				selectItem (0);
-
-
-			// Create Mock Data
-			peopleModel = new PeopleModel();
-
-			peopleModel.loadMockData();
+                
 		}
 
 		internal class MyActionBarDrawerToggle : ActionBarDrawerToggle
@@ -181,8 +172,8 @@ namespace NavigationDrawer
 				// update the main content by replacing fragments
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				addTab ("All people", new PeopleFragment (peopleModel));
-				addTab ("Teammates", new PeopleFragmentPartial (peopleModel));
+				addTab ("All people", new PeopleFragment ());
+				addTab ("Teammates", new PeopleFragmentPartial ());
 
 
 				// update selected item title, then close the drawer
