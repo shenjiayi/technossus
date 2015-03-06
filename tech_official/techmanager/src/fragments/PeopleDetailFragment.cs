@@ -21,10 +21,10 @@ namespace NavigationDrawer
 	public class PeopleDetailFragment : Fragment
 	{
 		string _name;
-		string _available;
+		DateTime _available;
 		string _technology;
 
-		public PeopleDetailFragment(string name, string available, string technology)
+		public PeopleDetailFragment(string name, DateTime available, string technology)
 		{
 			_name = name;
 			_available = available;
@@ -42,7 +42,7 @@ namespace NavigationDrawer
 
 			PeopleName.Text = "Name: "+ _name;
 			Technology.Text = "Technology: " + _technology;
-			Available.Text = "Available Date: " + _available;
+            Available.Text = "Available Date: " + _available.Date.ToString("d");
 
 			return rootView;
 		}

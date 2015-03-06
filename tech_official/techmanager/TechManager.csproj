@@ -88,6 +88,7 @@
     <Compile Include="src\fragments\PeopleDetailFragment.cs" />
     <Compile Include="src\ObjectExtensions.cs" />
     <Compile Include="src\SearchViewExpandListener.cs" />
+    <Compile Include="src\util\DateUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AndroidManifest.xml" />
@@ -156,5 +157,8 @@
       <Version>21.0.3.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\util\" />
   </ItemGroup>
 </Project>

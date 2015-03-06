@@ -62,7 +62,7 @@ namespace NavigationDrawer
 			var contactImage = view.FindViewById<ImageView> (Resource.Id.picture);
 
 			contactName.Text = _allemployee [position].name;
-			contactAvailable.Text = "Available:"+_allemployee [position].available;
+            contactAvailable.Text = "Available: "+_allemployee [position].available.Date.ToString("d");
 
 			if (_allemployee [position].photo == null) {
 
@@ -140,6 +140,11 @@ namespace NavigationDrawer
 				constraint.Dispose();
 				results.Dispose();
 			}
+
+            private bool dateSearch(employee e, string dateQuery)
+            {
+                return false;
+            }
 		}
 
 
