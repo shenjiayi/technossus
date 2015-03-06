@@ -91,11 +91,14 @@ namespace NavigationDrawer
 
 				if (_adapter._partial != null && _adapter._partial.Any())
 				{
+                    string lowerQuery = constraint.ToString().ToLower();
+
 					// Compare constraint to all names lowercased. 
 					// It they are contained they are added to results.
 					results.AddRange(
 						_adapter._partial.Where(
-							project => project.name.ToLower().Contains(constraint.ToString().ToLower())));
+                            project => queryProject(project, lowerQuery)
+                        ));
 				}
 
 				// Nasty piece of .NET to Java wrapping, be careful with this!
@@ -120,6 +123,23 @@ namespace NavigationDrawer
 				constraint.Dispose();
 				results.Dispose();
 			}
+
+            private bool queryProject(project p, string query)
+            {
+                if (p.name.ToLower().Contains(query) || p.client.ToLower().Contains(query) || p.description.ToLower().Contains(query))
+                    return true;
+
+                foreach (employee e in p.teamMember)
+                    if (e.name.ToLower().Contains(query))
+                        return true;
+
+                foreach (string s in p.technology)
+                    if (s.ToLower().Contains(query))
+                        return true;
+
+                // If no cases match, default to false
+                return false;
+            }
 		}
 
 

@@ -105,11 +105,13 @@ namespace NavigationDrawer
 
 				if (_adapter._partial != null && _adapter._partial.Any())
 				{
-					// Compare constraint to all names lowercased. 
-					// It they are contained they are added to results.
+                    string lowerQuery = constraint.ToString().ToLower();
+
+					// Compare constraint to all fields of client
 					results.AddRange(
 						_adapter._partial.Where(
-							cilent => cilent.name.ToLower().Contains(constraint.ToString().ToLower())));
+                            client => (client.name.ToLower().Contains(lowerQuery) || client.contactName.ToLower().Contains(lowerQuery) || client.contactEmail.ToLower().Contains(lowerQuery))
+                        ));
 				}
 
 				// Nasty piece of .NET to Java wrapping, be careful with this!
