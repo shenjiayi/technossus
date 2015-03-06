@@ -5,3 +5,4 @@ tech_official/techmanager/bin/Debug/**/*
 tech_official/techmanager/obj/Debug/**/*
 tech_official/packages/repositories.config
 tech_official/techManager.userprefs
+tech_official/techmanager/Resources/Resource.designer.cs
