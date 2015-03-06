@@ -14,7 +14,7 @@
     <AndroidApplication>True</AndroidApplication>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <AssemblyName>NavigationDrawer</AssemblyName>
-    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
@@ -58,6 +58,9 @@
     <Reference Include="Xamarin.Android.Support.v7.RecyclerView">
       <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.21.0.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Android.Support.v13">
+      <HintPath>..\packages\Xamarin.Android.Support.v13.21.0.3.0\lib\MonoAndroid32\Xamarin.Android.Support.v13.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
@@ -71,7 +74,6 @@
     <Compile Include="src\fragments\ClientFragment.cs">
     </Compile>
     <Compile Include="src\fragments\PeopleFragment.cs" />
-    <Compile Include="src\fragments\ClientFragmentPartial.cs" />
     <Compile Include="src\fragments\ProjectFragment.cs" />
     <Compile Include="src\objects\client.cs" />
     <Compile Include="src\objects\project.cs" />
@@ -81,11 +83,11 @@
     <Compile Include="src\objects\post.cs" />
     <Compile Include="src\fragments\PostFragment.cs" />
     <Compile Include="src\PostAdapter.cs" />
-    <Compile Include="src\fragments\PeopleFragmentPartial.cs" />
     <Compile Include="src\fragments\ProjectInfoFragment.cs" />
     <Compile Include="src\fragments\ClientDetailFragment.cs" />
     <Compile Include="src\fragments\PeopleDetailFragment.cs" />
     <Compile Include="src\ObjectExtensions.cs" />
+    <Compile Include="src\SearchViewExpandListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AndroidManifest.xml" />
@@ -137,11 +139,12 @@
     <AndroidResource Include="Resources\drawable\ic_launcher.png" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\clients.json" />
+    <AndroidAsset Include="Assets\project1.json" />
+    <AndroidAsset Include="Assets\login.json" />
+  </ItemGroup>
+  <ItemGroup>
     <XamarinComponentReference Include="xamandroidsupportv4-18">
-      <Version>21.0.3.0</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
-    <XamarinComponentReference Include="xamandroidsupportv7appcompat">
       <Version>21.0.3.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
@@ -149,10 +152,9 @@
       <Version>21.0.3.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\clients.json" />
-    <AndroidAsset Include="Assets\project1.json" />
-    <AndroidAsset Include="Assets\login.json" />
+    <XamarinComponentReference Include="xamandroidsupportv7appcompat">
+      <Version>21.0.3.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
   </ItemGroup>
 </Project>

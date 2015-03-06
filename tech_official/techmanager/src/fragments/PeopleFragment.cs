@@ -1,21 +1,17 @@
 ﻿using System;
 
 using Android.App;
-using Android.Content;
-using Android.Content.Res;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Android.Support.V4.App;
 using Android.Support.V4.View;
-using Android.Support.V4.Widget;
-using Android.Support.V7.Widget;
+using System.Collections.Generic;
+using SearchView = Android.Widget.SearchView;
 
 
 //Ambiguities
 using Fragment = Android.App.Fragment;
-using System.Collections.Generic;
 
 namespace NavigationDrawer
 {
@@ -24,27 +20,26 @@ namespace NavigationDrawer
 
 		public const string ARG_NUMBER = "id_number";
 
-        private List<employee> allemployee = new List<employee> () {
-            new employee (1, null, "Jone", "2014/3/2","Java,C++,Python"), new employee (2, null, "James", "2014/4/6","Java,C++,Python"), new employee (3, null, "Kate", "2015/3/1","Java,C++,Python"),
-            new employee (4, null, "Smith", "2015/3/1","Java,C++,Python"), new employee (5, null, "Peter", "2015/3/1","Java,C++,Python"), new employee (6, null, "Alice", "2015/3/1","Java,C++,Python"),
-            new employee (7, null, "Kitty", "2015/3/1","Java,C++,Python"), new employee (8, null, "Sam", "2015/3/1","Java,C++,Python"), new employee (9, null, "Ben", "2015/3/1","Java,C++,Python"),    
-            new employee (10, null, "Anteater", "2015/3/1","Java,C++,Python")
-        };
+		private SearchView _searchView;
 
-        // Deprecated constructor
-		public PeopleFragment ()
-		{
-			// Empty constructor required for fragment subclasses
+		private PeopleAdapter PeopleAdapter;
+
+		List<employee> allemployee;
+
+		public PeopleFragment(List<employee> data){
+			allemployee = data;
 		}
 
-		public static Fragment NewInstance (int position)
-		{
-			Fragment fragment = new PeopleFragment();
-			Bundle args = new Bundle ();
-			args.PutInt (PeopleFragment.ARG_NUMBER, position);
-			fragment.Arguments = args;
-			return fragment;
-		}
+
+
+		//		public static Fragment NewInstance (int position)
+		//		{
+		//			Fragment fragment = new PeopleFragment(allemployee);
+		//			Bundle args = new Bundle ();
+		//			args.PutInt (PeopleFragment.ARG_NUMBER, position);
+		//			fragment.Arguments = args;
+		//			return fragment;
+		//		}
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
@@ -52,11 +47,10 @@ namespace NavigationDrawer
 			View rootView = inflater.Inflate (Resource.Layout.people, container, false);
 			ListView employeelist;
 
-			PeopleAdapter PeopleAdapter;
 			employeelist = rootView.FindViewById<ListView> (Resource.Id.employeelist);
-            PeopleAdapter = new PeopleAdapter (this.Activity, allemployee);
+			PeopleAdapter = new PeopleAdapter (this.Activity, allemployee);
 			employeelist.Adapter = PeopleAdapter;
-
+			SetHasOptionsMenu (true);
 			return rootView;
 		}
 
@@ -68,6 +62,29 @@ namespace NavigationDrawer
 			transaction.Replace (Resource.Id.content_frame, fragment);
 			transaction.AddToBackStack (null);
 			transaction.Commit ();
+		}
+
+
+		public override void OnCreateOptionsMenu (IMenu menu, MenuInflater inflater)
+		{
+			inflater.Inflate(Resource.Menu.navigation_drawer, menu);
+
+			var item = menu.FindItem(Resource.Id.action_search);
+
+			var searchView = MenuItemCompat.GetActionView(item);
+			_searchView = searchView.JavaCast<SearchView>();
+
+			_searchView.QueryTextChange += (s, e) => PeopleAdapter.Filter.InvokeFilter(e.NewText);
+
+			_searchView.QueryTextSubmit += (s, e) =>
+			{
+				// Handle enter/search button on keyboard here
+				Toast.MakeText(this.Activity, "Searched for: " + e.Query, ToastLength.Short).Show();
+				e.Handled = true;
+			};
+
+			MenuItemCompat.SetOnActionExpandListener(item, new SearchViewExpandListener(PeopleAdapter));
+
 		}
 
 	}

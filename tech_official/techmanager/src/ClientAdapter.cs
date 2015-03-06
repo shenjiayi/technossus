@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Json;
+
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -27,11 +25,10 @@ namespace NavigationDrawer
 
 		public ClientAdapter(Activity a,IEnumerable<client> clients)
 		{
-			_allclient = clients.OrderBy(s => s.contactName).ToList();
+			_allclient = clients.OrderBy(s => s.name).ToList();
 			_activity = a;
 
 			Filter = new CilentFilter(this);
-
 		}
 
 
@@ -53,15 +50,6 @@ namespace NavigationDrawer
 
 		public override View GetView (int position, View convertView, ViewGroup parent)
 		{
-			string response;
-			System.IO.StreamReader strm = new System.IO.StreamReader (_activity.Assets.Open ("clients.json"));
-			response = strm.ReadToEnd ();
-			var obj = JsonObject.Parse (response);
-			JsonArray names = (JsonArray) obj ["names"];
-			JsonArray companies = (JsonArray) obj ["companies"];
-			JsonArray emails = (JsonArray) obj ["emails"];
-
-
 			var view = convertView ?? _activity.LayoutInflater.Inflate (Resource.Layout.ClientLayout, parent,false);
 			var name = view.FindViewById<TextView> (Resource.Id.name);
 
@@ -69,9 +57,9 @@ namespace NavigationDrawer
 			var contactEmail = view.FindViewById<TextView> (Resource.Id.contactEmail);
 			var contactImage = view.FindViewById<ImageView> (Resource.Id.picture);
 
-			name.Text = companies.ElementAt (position);//_allclient [position].name;
-			contactName.Text = "Contact: " + names.ElementAt (position);//_allclient [position].contactName;
-			contactEmail.Text = "Email: " + emails.ElementAt (position);//_allclient [position].contactEmail;
+			name.Text = _allclient [position].name;
+			contactName.Text = "Contact: "+ _allclient [position].contactName;
+			contactEmail.Text = "Email: " +_allclient [position].contactEmail;
 
 			if (_allclient [position].photo == null) {
 
@@ -135,7 +123,7 @@ namespace NavigationDrawer
 
 			protected override void PublishResults(ICharSequence constraint, FilterResults results)
 			{
-				using (var values = results.Values)
+				using (var values = results.Values)				
 					_adapter._allclient = values.ToArray<Object>()
 						.Select(r => r.ToNetObject<client>()).ToList();
 

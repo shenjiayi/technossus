@@ -11,19 +11,25 @@ using Android.Views;
 using Android.Widget;
 using Android.Provider;
 
+using Java.Lang;
+using Object = Java.Lang.Object;
+
 namespace NavigationDrawer
 {
-	public class PeopleAdapter:BaseAdapter
+	public class PeopleAdapter:BaseAdapter<employee>,IFilterable
 	{
 		private List<employee> _allemployee;
 		private Activity _activity; 
+		private List<employee> _partial;
 
 
 
-		public PeopleAdapter(Activity a, List<employee> data)
+		public PeopleAdapter(Activity a, IEnumerable<employee> data)
 		{
+			_allemployee = data.OrderBy(s => s.name).ToList();
 			_activity = a;
-			_allemployee = data;
+
+			Filter = new PeopleFilter(this);
 		}
 
 
@@ -42,6 +48,7 @@ namespace NavigationDrawer
 		public override long GetItemId (int position)
 		{
 			return _allemployee [position].id;
+			//			return position;
 		}
 
 
@@ -73,6 +80,66 @@ namespace NavigationDrawer
 			}
 			return view;
 		}
+
+
+		public override employee this[int position]
+		{
+			get { return _allemployee[position]; }
+		}
+
+		public Filter Filter { get; private set; }
+
+
+		private class PeopleFilter : Filter
+		{
+			private readonly PeopleAdapter _adapter;
+			public PeopleFilter(PeopleAdapter adapter)
+			{
+				_adapter = adapter;
+			}
+
+			protected override FilterResults PerformFiltering(ICharSequence constraint)
+			{
+				var returnObj = new FilterResults();
+				var results = new List<employee>();
+				if (_adapter._partial == null)
+					_adapter._partial = _adapter._allemployee;
+
+				if (constraint == null) return returnObj;
+
+				if (_adapter._partial != null && _adapter._partial.Any())
+				{
+					// Compare constraint to all names lowercased. 
+					// It they are contained they are added to results.
+					results.AddRange(
+						_adapter._partial.Where(
+							employee => employee.name.ToLower().Contains(constraint.ToString())));
+				}
+
+				// Nasty piece of .NET to Java wrapping, be careful with this!
+				returnObj.Values = FromArray(results.Select(r => r.ToJavaObject()).ToArray());
+				returnObj.Count = results.Count;
+
+				constraint.Dispose();
+
+				return returnObj;
+			}
+
+			protected override void PublishResults(ICharSequence constraint, FilterResults results)
+			{
+				using (var values = results.Values)				
+					_adapter._allemployee = values.ToArray<Object>()
+						.Select(r => r.ToNetObject<employee>()).ToList();
+
+
+				_adapter.NotifyDataSetChanged();
+
+				// Don't do this and see GREF counts rising
+				constraint.Dispose();
+				results.Dispose();
+			}
+		}
+
 
 	}
 

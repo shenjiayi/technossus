@@ -10,21 +10,27 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Provider;
+using Java.Lang;
+using Object = Java.Lang.Object;
 
 
 
 namespace NavigationDrawer
 {
-	public class ProjectAdapter:BaseAdapter
+	public class ProjectAdapter:BaseAdapter<project>,IFilterable
 	{
 		private List<project> _allproject;
+		private List<project> _partial;
 		private Activity _activity;
 
 
-		public ProjectAdapter(Activity a,List<project> data)
+
+		public ProjectAdapter(Activity a,IEnumerable<project> project)
 		{
+			_allproject = project.OrderBy(s => s.name).ToList();
 			_activity = a;
-			_allproject = data;
+
+			Filter = new ProjectFilter(this);
 		}
 
 		public override int Count {
@@ -40,7 +46,7 @@ namespace NavigationDrawer
 
 		public override long GetItemId (int position)
 		{
-			return _allproject [position].id;
+			return position;
 		}
 
 		public override View GetView (int position, View convertView, ViewGroup parent)
@@ -55,5 +61,67 @@ namespace NavigationDrawer
 			return view;
 
 		}
+
+
+		public override project this[int position]
+		{
+			get { return _allproject[position]; }
+		}
+
+
+		public Filter Filter { get; private set; }
+
+
+		private class ProjectFilter : Filter
+		{
+			private readonly ProjectAdapter _adapter;
+			public ProjectFilter(ProjectAdapter adapter)
+			{
+				_adapter = adapter;
+			}
+
+			protected override FilterResults PerformFiltering(ICharSequence constraint)
+			{
+				var returnObj = new FilterResults();
+				var results = new List<project>();
+				if (_adapter._partial == null)
+					_adapter._partial = _adapter._allproject;
+
+				if (constraint == null) return returnObj;
+
+				if (_adapter._partial != null && _adapter._partial.Any())
+				{
+					// Compare constraint to all names lowercased. 
+					// It they are contained they are added to results.
+					results.AddRange(
+						_adapter._partial.Where(
+							project => project.name.ToLower().Contains(constraint.ToString().ToLower())));
+				}
+
+				// Nasty piece of .NET to Java wrapping, be careful with this!
+				returnObj.Values = FromArray(results.Select(r => r.ToJavaObject()).ToArray());
+				returnObj.Count = results.Count;
+
+				constraint.Dispose();
+
+				return returnObj;
+			}
+
+			protected override void PublishResults(ICharSequence constraint, FilterResults results)
+			{
+				using (var values = results.Values)				
+					_adapter._allproject = values.ToArray<Object>()
+						.Select(r => r.ToNetObject<project>()).ToList();
+
+
+				_adapter.NotifyDataSetChanged();
+
+				// Don't do this and see GREF counts rising
+				constraint.Dispose();
+				results.Dispose();
+			}
+		}
+
+
 	}
 }

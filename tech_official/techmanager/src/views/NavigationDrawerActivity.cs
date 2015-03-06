@@ -29,6 +29,52 @@ namespace NavigationDrawer
 		private string mDrawerTitle;
 		private String[] mMenuTitles;
 
+		//data here 
+		//make sure they are in alphebetical order for now
+		List<employee> allemployee = new List<employee> () {
+			new employee (0, null, "Alice", "2015/3/1","Jave"),new employee (0, null, "Anteater", "2015/3/1","Jave"),new employee (0, null, "Ben", "2015/3/1","Jave"),	
+			new employee (0, null, "James", "2014/4/6","Jave"), new employee (0, null, "Jone", "2014/3/2","Jave"),new employee (0, null, "Kate", "2015/3/1","Jave"),
+			new employee (0, null, "Kitty", "2015/3/1","Jave"),new employee (0, null, "Peter", "2015/3/1","Jave"), 
+			new employee (0, null, "Sam", "2015/3/1","Jave"),new employee (0, null, "Smith", "2015/3/1","Jave"), 
+
+		};
+
+		List<employee> employeepartial = new List<employee> () {
+			new employee (0, null, "Alice", "2015/3/1","Jave"),new employee (0, null, "Anteater", "2015/3/1","Jave"),new employee (0, null, "Ben", "2015/3/1","Jave"),	
+			new employee (0, null, "James", "2014/4/6","Jave"), new employee (0, null, "Jone", "2014/3/2","Jave")
+		};
+
+		List<client> allclient = new List<client> ()
+		{
+			new client(0,null,"Apple","Mark Smith","marksmith@spaceX.com"),
+			new client(0,null,"CompanyName","Peter Anteater","peteranteater@uci.edu"),
+			new client(0,null,"Dell","Alice bLALA","alice@uci.edu"),
+			new client(0,null,"SpaceX","Mark Smith","marksmith@spaceX.com")};
+
+		List<client> clientpartial = new List<client> ()
+		{
+			new client(0,null,"CompanyName","Peter Anteater","peteranteater@uci.edu"),
+			new client(0,null,"SpaceX","Mark Smith","marksmith@spaceX.com")};
+
+		//project 1 data
+		static List <employee> teamMember1 = new List<employee> () {
+			new employee (0, null, "James", "2014/4/6","c++"),
+			new employee (0, null, "Jone", "2014/3/2","Java"),
+			new employee (0, null, "Kate", "2015/3/1","Python")
+		};
+		static List <string> technology1 = new List<string> { "java", "c#", "html" };
+
+		List <project> allproject1 = new List<project> () {
+			new project (0, "Database", "Apple", "2014/03/27", "2015/01/23", teamMember1, technology1,""),
+			new project (0, "Mobile App", "UCI", "2014/06/24", "2015/05/23", teamMember1, technology1,""),
+			new project (0, "Project Name", "SpaceX", "2014/03/24", "2015/07/23", teamMember1, technology1,""),
+			new project (0, "Web Design", "Technossus","2014/02/24", "2015/07/23", teamMember1, technology1,"")
+
+		};
+
+
+
+
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
 
@@ -61,9 +107,6 @@ namespace NavigationDrawer
 				Resource.String.drawer_close);
 
 			mDrawerLayout.SetDrawerListener (mDrawerToggle);
-			if (savedInstanceState == null) //first launch
-				selectItem (0);
-                
 		}
 
 		internal class MyActionBarDrawerToggle : ActionBarDrawerToggle
@@ -91,19 +134,7 @@ namespace NavigationDrawer
 
 		public override bool OnCreateOptionsMenu (IMenu menu)
 		{
-			// Inflate the menu; this adds items to the action bar if it is present.
-//			this.MenuInflater.Inflate (Resource.Menu.navigation_drawer, menu);
-//			SearchManager SManager = (SearchManager)GetSystemService (Context.SearchService);
-//			Android.Widget.SearchView searchview = (Android.Widget.SearchView)menu.FindItem (Resource.Id.action_search).ActionView;
-//			searchview.SetSearchableInfo(SManager.GetSearchableInfo (ComponentName));
-//			Android.Support.V7.Widget.SearchView searchViewAction = (Android.Support.V7.Widget.SearchView)MenuItemCompat.GetActionView (searchMenuItem);
-//			searchViewAction.SetSearchableInfo (SManager.GetSearchableInfo (()));
-//			searchViewAction.SetIconifiedByDefault (false);
 			return false;
-
-//
-//
-//			return true;
 		}
 
 		/* Called whenever we call invalidateOptionsMenu() */
@@ -124,22 +155,8 @@ namespace NavigationDrawer
 			}
 			// Handle action buttons
 			switch (item.ItemId) {
-//			case Resource.Id.action_websearch:
-//				// create intent to perform web search
-//				Intent intent = new Intent (Intent.ActionWebSearch);
-//				intent.PutExtra (SearchManager.Query, this.ActionBar.Title);
-//
-//
-//
-//				// catch event that there's no activity to handle intent
-//				if (intent.ResolveActivity (this.PackageManager) != null) {
-//					StartActivity (intent);
-//				} else {
-//					Toast.MakeText (this, Resource.String.app_not_available, ToastLength.Long).Show ();
-//				}
-//				return true;
 			default:
-				return base.OnOptionsItemSelected (item);
+				return false;
 			}
 		}
 
@@ -159,7 +176,7 @@ namespace NavigationDrawer
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
 				addTab ("Info", new ProjectInfoFragment ());
 				addTab ("Dashboard", new PostFragment ());
-				addTab ("Teammate", new PeopleFragment ());
+				addTab ("Teammate", new PeopleFragment (allemployee));
 
 				Title = mMenuTitles [position];
 				mDrawerLayout.CloseDrawer (mDrawerList);
@@ -172,9 +189,8 @@ namespace NavigationDrawer
 				// update the main content by replacing fragments
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				addTab ("All people", new PeopleFragment ());
-				addTab ("Teammates", new PeopleFragmentPartial ());
-
+				addTab ("All people", new PeopleFragment (allemployee));
+				addTab ("Teammates", new PeopleFragment (employeepartial));
 
 				// update selected item title, then close the drawer
 				Title = mMenuTitles [position];
@@ -185,8 +201,8 @@ namespace NavigationDrawer
 				// update the main content by replacing fragments
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				addTab ("All Clients", new ClientFragment ());
-				addTab ("Your Clients", new ClientFragmentPartial ());
+				addTab ("All Clients", new ClientFragment (allclient));
+				addTab ("Your Clients", new ClientFragment (clientpartial));
 
 				// update selected item title, then close the drawer
 				Title = mMenuTitles [position];
@@ -196,13 +212,12 @@ namespace NavigationDrawer
 			case 6: // Project Screen
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				addTab ("All Clients", new ProjectFragment ());
-				addTab ("Your Clients", new ProjectFragment ());
+				addTab ("All Clients", new ProjectFragment (allproject1));
+				addTab ("Your Clients", new ProjectFragment (allproject1));
 
 				// update selected item title, then close the drawer
 				Title = mMenuTitles [position];
 				mDrawerLayout.CloseDrawer (mDrawerList);
-
 				break;
 			}
 		}

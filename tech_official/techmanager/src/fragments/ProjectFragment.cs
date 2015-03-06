@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
-using Android.OS;
 using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Android.OS;
+using Android.Support.V4.View;
+using System.Collections.Generic;
+using SearchView = Android.Widget.SearchView;
+
 
 
 //Ambiguities
 using Fragment = Android.App.Fragment;
-using System.Collections.Generic;
+
 
 namespace NavigationDrawer
 {
@@ -21,45 +21,52 @@ namespace NavigationDrawer
 	{
 		public const string ARG_NUMBER = "id_number";
 
-		public ProjectFragment()
-		{
+
+
+		private SearchView _searchView;
+
+		private ProjectAdapter ProjectAdapter;
+
+		List<project> allproject;
+
+
+		public ProjectFragment(List<project> data){
+			allproject = data;
 		}
 
 
-		public static Fragment NewInstance (int position)
-		{
-			Fragment fragment = new ProjectFragment();
-			Bundle args = new Bundle ();
-			args.PutInt (ProjectFragment.ARG_NUMBER, position);
-			fragment.Arguments = args;
-			return fragment;
-		}
+
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
 			View rootView = inflater.Inflate (Resource.Layout.project, container, false);
 			ListView projectlist;
-			List <employee> teamMember = new List<employee> () {
-				new employee (0, null, "Jone", "2014/3/2","Java"),
-				new employee (0, null, "James", "2014/4/6","c++"),
-				new employee (0, null, "Kate", "2015/3/1","Python")
-			};
-			List <string> technology = new List<string> { "java", "c#", "html" };
-
-			List <project> allproject = new List<project> () {
-				new project (0, "Project Name", "SpaceX", "2014/03/24", "2015/07/23", teamMember, technology,""),
-				new project (0, "Mobile App", "UCI", "2014/06/24", "2015/05/23", teamMember, technology,""),
-				new project (0, "Web Design", "Technossus","2014/02/24", "2015/07/23", teamMember, technology,""),
-				new project (0, "Database", "Apple", "2014/03/27", "2015/01/23", teamMember, technology,"")
-			};
-
-
-			ProjectAdapter ProjectAdapter;
 			projectlist = rootView.FindViewById<ListView> (Resource.Id.projectlist);
 			ProjectAdapter = new ProjectAdapter(this.Activity,allproject);
 			projectlist.Adapter = ProjectAdapter;
+			SetHasOptionsMenu (true);
 			return rootView;
+		}
 
+		public override void OnCreateOptionsMenu (IMenu menu, MenuInflater inflater)
+		{
+			inflater.Inflate(Resource.Menu.navigation_drawer, menu);
+
+			var item = menu.FindItem(Resource.Id.action_search);
+
+			var searchView = MenuItemCompat.GetActionView(item);
+			_searchView = searchView.JavaCast<SearchView>();
+
+			_searchView.QueryTextChange += (s, e) => ProjectAdapter.Filter.InvokeFilter(e.NewText);
+
+			_searchView.QueryTextSubmit += (s, e) =>
+			{
+				// Handle enter/search button on keyboard here
+				Toast.MakeText(this.Activity, "Searched for: " + e.Query, ToastLength.Short).Show();
+				e.Handled = true;
+			};
+
+			MenuItemCompat.SetOnActionExpandListener(item, new SearchViewExpandListener(ProjectAdapter));
 
 		}
 
