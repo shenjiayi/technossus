@@ -40,8 +40,8 @@ namespace NavigationDrawer
 
         public static bool isDuringMonth(DateTime date, string month)
         {
-            string dateMonth = date.Date.ToString("MMM");
-            if (month.ToLower().Contains(dateMonth.ToLower()))
+            string dateMonth = date.Date.ToString("MMMM");
+            if (dateMonth.ToLower().Contains(month.ToLower()))
             {
                 return true;
             }
