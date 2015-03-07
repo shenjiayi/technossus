@@ -15,7 +15,7 @@
   limitations under the License.
   -->
 <resources>
-    <string-array name="planets_array">
+    <string-array name="menu_array">
         <item>Dashboard</item>
         <item>Project1</item>
         <item>Project2</item>

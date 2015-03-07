@@ -24,13 +24,12 @@ namespace NavigationDrawer
 	public class PostFragment : Fragment
 	{
 		public const string ARG_NUMBER = "id_number";
-		List<post> allpost = new List<post> () {
-			new post (0, null,"Added Jone to the project", "Peter Anteater", "Web Design", "technossus", "2014/2/12"),
-			new post (0, null,"Added Jone to the project", "Peter Anteater", "Web Design", "technossus", "2014/2/12"),
-			new post (0, null,"Added Jone to the project", "Peter Anteater", "Web Design", "technossus", "2014/2/12"),
-			new post (0, null,"Added Jone to the project", "Peter Anteater", "Web Design", "technossus", "2014/2/12")
-		};
 
+		List<post> allpost;
+
+		public PostFragment(List<post> data){
+			allpost = data;
+		}
 
 		public PostFragment ()
 		{

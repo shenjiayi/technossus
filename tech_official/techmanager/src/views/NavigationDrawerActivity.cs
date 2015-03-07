@@ -56,6 +56,8 @@ namespace NavigationDrawer
 			new client(0,null,"CompanyName","Peter Anteater","peteranteater@uci.edu"),
 			new client(0,null,"SpaceX","Mark Smith","marksmith@spaceX.com")};
 
+		string [] menu_item = {"Dashboard", "Web Design","Mobile App","Database design","People", "Clients", "Projects"};
+
 		//project 1 data
 		static List <employee> teamMember1 = new List<employee> () {
 			new employee (0, null, "James", "2014/4/6","c++"),
@@ -73,6 +75,16 @@ namespace NavigationDrawer
 		};
 
 
+		List<post> allpost = new List<post> () {
+			new post (0, null,"Added Jone Smith to the project", "Peter Anteater", "Web Design", "technossus", "2014/2/12"),
+			new post (0, null,"Added Ada Smith to the project", "Peter Anteater", "Mobile App", "technossus", "2014/2/12"),
+			new post (0, null,"Looking forward to working on the project", "Jone Smith", "Web Design", "technossus", "2014/2/14"),
+			new post (0, null,"Meeing at 9:30", "Peter Anteater", "Mobile App", "technossus", "2014/2/15"),
+			new post (0, null,"Meeting tommorow", "Peter Anteater", "Web Design", "technossus", "2014/3/12"),
+			new post (0, null,"Just commit my changes", "Kate Chen", "Web Design", "technossus", "2014/5/12")
+		};
+
+
 
 
 		protected override void OnCreate (Bundle savedInstanceState)
@@ -82,7 +94,7 @@ namespace NavigationDrawer
 			SetContentView (Resource.Layout.activity_navigation_drawer);
 
 			mDrawerTitle = this.Title;
-			mMenuTitles = this.Resources.GetStringArray (Resource.Array.planets_array);
+			//			mMenuTitles = this.Resources.GetStringArray (Resource.Array.menu_array);
 			mDrawerLayout = FindViewById<DrawerLayout> (Resource.Id.drawer_layout);
 			mDrawerList = FindViewById<RecyclerView> (Resource.Id.left_drawer);
 
@@ -93,7 +105,7 @@ namespace NavigationDrawer
 			mDrawerList.SetLayoutManager (new LinearLayoutManager (this));
 
 			// set up the drawer's list view with items and click listener
-			mDrawerList.SetAdapter (new MenuAdapter (mMenuTitles, this));
+			mDrawerList.SetAdapter (new MenuAdapter (menu_item, this));
 			// enable ActionBar app icon to behave as action to toggle nav drawer
 			this.ActionBar.SetDisplayHomeAsUpEnabled (true);
 			this.ActionBar.SetHomeButtonEnabled (true);
@@ -170,15 +182,24 @@ namespace NavigationDrawer
 		{
 			switch (position) {
 			case 0: // main dashboard
+				ActionBar.RemoveAllTabs ();
+				var fragmentManger = this.FragmentManager;
+				var ft = fragmentManger.BeginTransaction ();
+				ft.Replace (Resource.Id.content_frame, new PostFragment(allpost));
+				ft.Commit ();
+
+				Title = menu_item [position];
+				mDrawerLayout.CloseDrawer (mDrawerList);
 				break;
 			case 1: // Project 1
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
+				List<post> data = filterpost (menu_item [position], allpost);
 				addTab ("Info", new ProjectInfoFragment ());
-				addTab ("Dashboard", new PostFragment ());
+				addTab ("Dashboard", new PostFragment (data));
 				addTab ("Teammate", new PeopleFragment (allemployee));
 
-				Title = mMenuTitles [position];
+				Title = menu_item [position];
 				mDrawerLayout.CloseDrawer (mDrawerList);
 				break;
 			case 2: // Project 2
@@ -188,12 +209,12 @@ namespace NavigationDrawer
 			case 4: // People Screen
 				// update the main content by replacing fragments
 				ActionBar.RemoveAllTabs ();
-				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
+				ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
 				addTab ("All people", new PeopleFragment (allemployee));
 				addTab ("Teammates", new PeopleFragment (employeepartial));
 
 				// update selected item title, then close the drawer
-				Title = mMenuTitles [position];
+				Title = menu_item [position];
 				mDrawerLayout.CloseDrawer (mDrawerList);
 
 				break;
@@ -205,7 +226,7 @@ namespace NavigationDrawer
 				addTab ("Your Clients", new ClientFragment (clientpartial));
 
 				// update selected item title, then close the drawer
-				Title = mMenuTitles [position];
+				Title = menu_item [position];
 				mDrawerLayout.CloseDrawer (mDrawerList);
 
 				break;
@@ -216,7 +237,7 @@ namespace NavigationDrawer
 				addTab ("Your Clients", new ProjectFragment (allproject1));
 
 				// update selected item title, then close the drawer
-				Title = mMenuTitles [position];
+				Title = menu_item [position];
 				mDrawerLayout.CloseDrawer (mDrawerList);
 				break;
 			}
@@ -275,6 +296,15 @@ namespace NavigationDrawer
 			mDrawerToggle.OnConfigurationChanged (newConfig);
 		}
 
+		public List<post> filterpost (string projectname, List<post> allpost)
+		{
+			List<post> result = new List<post>{};
+			foreach (post item in allpost){
+				if (item.project == projectname)
+					result.Add (item);
+			}
+			return result;
+		}
 
 	}
 }

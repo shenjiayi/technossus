@@ -24,6 +24,16 @@ namespace NavigationDrawer
 			this.client = client;
 			this.date = date;
 		}
+
+		public post(post prev)
+		{
+			id = prev.id;
+			photo = prev.photo;
+			name = prev.name;
+			content = prev.content;
+			project = prev.project;
+			date = prev.date;
+		}
 	}
 }
 

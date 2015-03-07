@@ -30,17 +30,6 @@ namespace NavigationDrawer
 			allemployee = data;
 		}
 
-
-
-		//		public static Fragment NewInstance (int position)
-		//		{
-		//			Fragment fragment = new PeopleFragment(allemployee);
-		//			Bundle args = new Bundle ();
-		//			args.PutInt (PeopleFragment.ARG_NUMBER, position);
-		//			fragment.Arguments = args;
-		//			return fragment;
-		//		}
-
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 		{

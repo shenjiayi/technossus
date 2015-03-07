@@ -145,6 +145,9 @@
     <AndroidAsset Include="Assets\login.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="src\util\" />
+  </ItemGroup>
+  <ItemGroup>
     <XamarinComponentReference Include="xamandroidsupportv4-18">
       <Version>21.0.3.0</Version>
       <Visible>False</Visible>
@@ -157,8 +160,5 @@
       <Version>21.0.3.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\util\" />
   </ItemGroup>
 </Project>
