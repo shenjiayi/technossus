@@ -97,7 +97,7 @@ namespace NavigationDrawer
 					// It they are contained they are added to results.
 					results.AddRange(
 						_adapter._partial.Where(
-                            project => queryProject(project, lowerQuery)
+                            project => QueryProject(project, lowerQuery)
                         ));
 				}
 
@@ -124,7 +124,23 @@ namespace NavigationDrawer
 				results.Dispose();
 			}
 
-            private bool queryProject(project p, string query)
+            // Overall Query Method that takes in string, tokenizes it, and searches for projects that satisfy all terms
+            private bool QueryProject(project p, string query)
+            {
+                string[] tokens = query.Trim().Split(' ');
+                foreach (string q in tokens)
+                {
+                    if (!QueryTokenProject(p, q))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            // Query individual term in project
+            private bool QueryTokenProject(project p, string query)
             {
                 if (p.name.ToLower().Contains(query) 
                     || p.client.ToLower().Contains(query) 

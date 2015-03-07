@@ -114,7 +114,7 @@ namespace NavigationDrawer
 					// Compare constraint to all fields of Employee
 					results.AddRange(
 						_adapter._partial.Where(
-                            employee => (employee.name.ToLower().Contains(lowerQuery) || employee.technology.ToLower().Contains(lowerQuery) || DateUtil.isDuringMonth(employee.available, lowerQuery))
+                            employee => QueryEmployee(employee, lowerQuery)
                         ));
 				}
 
@@ -141,14 +141,27 @@ namespace NavigationDrawer
 				results.Dispose();
 			}
 
-            private bool dateSearch(employee e, string dateQuery)
+            // Overall Query method, returns list of employee that satisfies all tokens of query
+            private bool QueryEmployee(employee e, string query)
             {
-                return false;
+                string[] tokens = query.Trim().Split(' ');
+                foreach (string q in tokens)
+                {
+                    // If employee does not contain a token, return false
+                    if (!QueryTokenEmployee(e, q))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            private bool QueryTokenEmployee(employee e, string query)
+            {
+                return (e.name.ToLower().Contains(query) || e.technology.ToLower().Contains(query) || DateUtil.isDuringMonth(e.available, query));
             }
 		}
-
-
 	}
-
 }
 

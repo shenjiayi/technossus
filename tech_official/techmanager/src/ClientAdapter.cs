@@ -110,7 +110,7 @@ namespace NavigationDrawer
 					// Compare constraint to all fields of client
 					results.AddRange(
 						_adapter._partial.Where(
-                            client => (client.name.ToLower().Contains(lowerQuery) || client.contactName.ToLower().Contains(lowerQuery) || client.contactEmail.ToLower().Contains(lowerQuery))
+                            client => QueryClient(client, lowerQuery)
                         ));
 				}
 
@@ -136,6 +136,26 @@ namespace NavigationDrawer
 				constraint.Dispose();
 				results.Dispose();
 			}
+
+            private bool QueryClient(client c, string query)
+            {
+                string[] tokens = query.Trim().Split(' ');
+                foreach (string q in tokens)
+                {
+                    if (!QueryTokenClient(c,q))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+
+            private bool QueryTokenClient(client c, string query)
+            {
+                return (c.name.ToLower().Contains(query) || c.contactName.ToLower().Contains(query) || c.contactEmail.ToLower().Contains(query));
+            }
 		}
 
 	}
