@@ -126,7 +126,11 @@ namespace NavigationDrawer
 
             private bool queryProject(project p, string query)
             {
-                if (p.name.ToLower().Contains(query) || p.client.ToLower().Contains(query) || p.description.ToLower().Contains(query))
+                if (p.name.ToLower().Contains(query) 
+                    || p.client.ToLower().Contains(query) 
+                    || p.description.ToLower().Contains(query) 
+                    || DateUtil.isDuringMonth(p.startDate, query) 
+                    || DateUtil.isDuringMonth(p.endDate,query))
                     return true;
 
                 foreach (employee e in p.teamMember)

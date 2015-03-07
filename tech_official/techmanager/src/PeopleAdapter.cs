@@ -114,7 +114,7 @@ namespace NavigationDrawer
 					// Compare constraint to all fields of Employee
 					results.AddRange(
 						_adapter._partial.Where(
-                            employee => (employee.name.ToLower().Contains(lowerQuery) || employee.technology.ToLower().Contains(lowerQuery))
+                            employee => (employee.name.ToLower().Contains(lowerQuery) || employee.technology.ToLower().Contains(lowerQuery) || DateUtil.isDuringMonth(employee.available, lowerQuery))
                         ));
 				}
 

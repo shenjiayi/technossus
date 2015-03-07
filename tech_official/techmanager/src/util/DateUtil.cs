@@ -37,6 +37,17 @@ namespace NavigationDrawer
                 return new DateTime(1, 1, 1);
             }
         }
+
+        public static bool isDuringMonth(DateTime date, string month)
+        {
+            string dateMonth = date.Date.ToString("MMM");
+            if (month.ToLower().Contains(dateMonth.ToLower()))
+            {
+                return true;
+            }
+            else
+                return false;
+        }
     }
 }
 
