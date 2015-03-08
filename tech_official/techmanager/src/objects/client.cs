@@ -28,7 +28,6 @@ namespace NavigationDrawer
 			contactName = prev.contactName;
 			contactEmail = prev.contactEmail;
 		}
-
 	}
 }
 

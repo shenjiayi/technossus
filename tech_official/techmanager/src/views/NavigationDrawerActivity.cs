@@ -13,6 +13,7 @@ using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
 using System.Json;
+using System.Linq;
 
 
 //Ambiguities
@@ -329,7 +330,9 @@ namespace NavigationDrawer
                 }
             }
 
-            return client_list;
+            List<client> ordered_client_list = client_list.OrderBy(x => x.name).ToList();
+
+            return ordered_client_list;
         }
 
 		private List<employee> LoadPeopleData(string arg)
@@ -348,7 +351,9 @@ namespace NavigationDrawer
 				}
 			}
 
-			return people_list;
+            List<employee> ordered_people_list = people_list.OrderBy(x => x.name).ToList();
+
+            return ordered_people_list;
 		}
 
 	}
