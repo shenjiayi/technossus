@@ -80,18 +80,7 @@ namespace NavigationDrawer
 			MenuItemCompat.SetOnActionExpandListener(item, new SearchViewExpandListener(ClientAdapter));
 
 		}
-
-
-//		public override void OnSaveInstanceState (Bundle outState)
-//		{
-//			Activity.FragmentManager.PutFragment (outState, null, this);
-//		}
-//
-//		public override void OnViewStateRestored (Bundle savedInstanceState)
-//		{
-//			Activity.FragmentManager.GetFragment (savedInstanceState, null);
-//		}
-
+			
 	}
 }
 

@@ -275,7 +275,11 @@ namespace NavigationDrawer
 
 		public override void OnBackPressed ()
 		{
-			return;
+			if (FragmentManager.BackStackEntryCount > 0) {
+				FragmentManager.PopBackStack();
+			} else {
+				return;
+			}
 		}
 
 
