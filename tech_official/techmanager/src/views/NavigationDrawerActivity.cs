@@ -64,7 +64,7 @@ namespace NavigationDrawer
 			new client(0,null,"CompanyName","Peter Anteater","peteranteater@uci.edu"),
 			new client(0,null,"SpaceX","Mark Smith","marksmith@spaceX.com")};
 
-		string [] menu_item = {"Dashboard", "Web Design","Mobile App","Database design","People", "Clients", "Projects"};
+		string [] menu_item = {"Dashboard", "Web Design","Mobile App","Database design","People", "Clients", "Projects","Log out"};
 
 		//project 1 data
 		static List <employee> teamMember1 = new List<employee> () {
@@ -248,6 +248,9 @@ namespace NavigationDrawer
 				Title = menu_item [position];
 				mDrawerLayout.CloseDrawer (mDrawerList);
 				break;
+			case 7:
+				base.OnBackPressed ();
+				break;
 			}
 		}
 
@@ -267,14 +270,13 @@ namespace NavigationDrawer
 					e.FragmentTransaction.Remove (framgent);
 				e.FragmentTransaction.Add (Resource.Id.content_frame, view);
 			};
-			tab.TabUnselected += delegate(object sender, ActionBar.TabEventArgs e) {
-				e.FragmentTransaction.Remove(view);
-			};
-
 			this.ActionBar.AddTab (tab);
 		}
 
-
+		public override void OnBackPressed ()
+		{
+			return;
+		}
 
 
 		private void SetTitle (string title)
