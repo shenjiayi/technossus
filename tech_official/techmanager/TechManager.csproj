@@ -89,6 +89,7 @@
     <Compile Include="src\ObjectExtensions.cs" />
     <Compile Include="src\SearchViewExpandListener.cs" />
     <Compile Include="src\util\DateUtil.cs" />
+    <Compile Include="src\util\JsonLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AndroidManifest.xml" />
@@ -143,7 +144,7 @@
     <AndroidAsset Include="Assets\clients.json" />
     <AndroidAsset Include="Assets\project1.json" />
     <AndroidAsset Include="Assets\login.json" />
-	<AndroidAsset Include="Assets\login2.json" />
+    <AndroidAsset Include="Assets\login2.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\util\" />

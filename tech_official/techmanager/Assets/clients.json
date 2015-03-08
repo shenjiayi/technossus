@@ -1,5 +1,10 @@
 ﻿{
-"names":["Dave", "Alice", "Steve", "John"],
-"companies":["Dell", "Apple", "SpaceX", "Google"],
-"emails":["dave@dell.com", "Alice@apple.com", "steve@spacex.net", "john@gmail.com"],
+	"client_list" : [
+		{ "company" : "Dell", "contact_name" : "Michael Dell", "contact_email" : "mdell@dell.com", "id" : 1, "your_client" : true },
+		{ "company" : "Apple", "contact_name" : "Steve Wozniak", "contact_email" : "steve2@apple.com", "id" : 2, "your_client" : true },
+		{ "company" : "SpaceX", "contact_name" : "Elon Musk", "contact_email" : "elon@spacex.com", "id" : 3, "your_client" : false },
+		{ "company" : "Google", "contact_name" : "Eric Page", "contact_email" : "ep@gmail.com", "id" : 4, "your_client" : false },
+		{ "company" : "Microsoft", "contact_name" : "Bill Gates", "contact_email" : "bg@microsoft.com", "id" : 5, "your_client" : true },
+		{ "company" : "Amazon", "contact_name" : "Jeff Bezos", "contact_email" : "jeffreyBzs@amazon.com", "id" : 6, "your_client" : false }
+	]
 }

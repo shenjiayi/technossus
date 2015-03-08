@@ -12,6 +12,8 @@ using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
+using System.Json;
+
 
 //Ambiguities
 using Fragment = Android.App.Fragment;
@@ -30,6 +32,11 @@ namespace NavigationDrawer
 		private String[] mMenuTitles;
 
 		//data here 
+
+        // Use this to find relevant data for user.  For testing purposes
+        private readonly string default_user = "John Doe";
+
+
 		//make sure they are in alphebetical order for now
 		List<employee> allemployee = new List<employee> () {
 			new employee (0, null, "Alice", "2015/3/1","Jave"),new employee (0, null, "Anteater", "2015/3/1","Jave"),new employee (0, null, "Ben", "2015/3/1","Jave"),	
@@ -222,8 +229,8 @@ namespace NavigationDrawer
 				// update the main content by replacing fragments
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				addTab ("All Clients", new ClientFragment (allclient));
-				addTab ("Your Clients", new ClientFragment (clientpartial));
+                addTab ("All Clients", new ClientFragment (LoadClientData("ALL")));
+                addTab ("Your Clients", new ClientFragment (LoadClientData("PARTIAL")));
 
 				// update selected item title, then close the drawer
 				Title = menu_item [position];
@@ -305,6 +312,25 @@ namespace NavigationDrawer
 			}
 			return result;
 		}
+
+        private List<client> LoadClientData(string arg)
+        {
+            List<client> client_list = new List<client>();
+            var jl = new JsonLoader();
+            JsonValue data = jl.LoadData(this, "clients.json");
+            var list = (JsonArray) data["client_list"];
+
+            foreach (JsonObject j in list)
+            {
+                // Two cases, either all will be let through, or only those that are your client (FULL/PARTIAL)
+                if (arg.Equals("ALL") || j["your_client"])
+                {
+                    client_list.Add(new client(j["id"], null, j["company"], j["contact_name"], j["contact_email"]));
+                }
+            }
+
+            return client_list;
+        }
 
 	}
 }
