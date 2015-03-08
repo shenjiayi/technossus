@@ -217,8 +217,8 @@ namespace NavigationDrawer
 				// update the main content by replacing fragments
 				ActionBar.RemoveAllTabs ();
 				ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				addTab ("All people", new PeopleFragment (allemployee));
-				addTab ("Teammates", new PeopleFragment (employeepartial));
+				addTab ("All people", new PeopleFragment (LoadPeopleData("ALL")));
+				addTab ("Teammates", new PeopleFragment (LoadPeopleData("PARTIAL")));
 
 				// update selected item title, then close the drawer
 				Title = menu_item [position];
@@ -331,6 +331,25 @@ namespace NavigationDrawer
 
             return client_list;
         }
+
+		private List<employee> LoadPeopleData(string arg)
+		{
+			List<employee> people_list = new List<employee>();
+			var jl = new JsonLoader();
+			JsonValue data = jl.LoadData(this, "people.json");
+			var list = (JsonArray) data["people_list"];
+
+			foreach (JsonObject j in list)
+			{
+				// Two cases, either all will be let through, or only those that are your client (FULL/PARTIAL)
+				if (arg.Equals("ALL") || j["your_people"])
+				{
+					people_list.Add(new employee(j["id"], null, j["name"], j["avail"], null));
+				}
+			}
+
+			return people_list;
+		}
 
 	}
 }
