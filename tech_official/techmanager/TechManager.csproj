@@ -143,6 +143,7 @@
     <AndroidAsset Include="Assets\clients.json" />
     <AndroidAsset Include="Assets\project1.json" />
     <AndroidAsset Include="Assets\login.json" />
+	<AndroidAsset Include="Assets\login2.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\util\" />

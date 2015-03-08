@@ -52,35 +52,49 @@ namespace NavigationDrawer
 		{
 			string response;
 			Boolean test = true;
-			System.IO.StreamReader strm = new System.IO.StreamReader (Assets.Open ("login.json"));
+			System.IO.StreamReader strm = new System.IO.StreamReader (Assets.Open ("login2.json"));
 			response = strm.ReadToEnd ();
 			var obj = JsonObject.Parse (response);
-			JsonArray un = (JsonArray) obj ["username"];
-			JsonArray pw = (JsonArray)obj ["password"];
+            JsonArray list = (JsonArray) obj["valid_users"];
+//			JsonArray un = (JsonArray) obj ["username"];
+//			JsonArray pw = (JsonArray)obj ["password"];
 
 
-			//Thread.Sleep (3000);
-			for(int i = 0; i < un.Count(); i++){
-				if (username == un.ElementAt (i)) {
-					if (password == pw.ElementAt (i)) {
-						test = false;
-						Intent intent = new Intent (this, typeof(NavigationDrawerActivity));
-						this.StartActivity (intent);
-					} 
-				}		//test = false;
-			} 
-
-			if (test == true) {
-				Toast.MakeText (this, "Invalid account! Please try again.", ToastLength.Long).Show ();
-			}
+//			//Thread.Sleep (3000);
+//			for(int i = 0; i < un.Count(); i++){
+//				if (username == un.ElementAt (i)) {
+//					if (password == pw.ElementAt (i)) {
+//						test = false;
+//						Intent intent = new Intent (this, typeof(NavigationDrawerActivity));
+//						this.StartActivity (intent);
+//					} 
+//				}		//test = false;
+//			} 
+//
+//			if (test == true) {
+//				Toast.MakeText (this, "Invalid account! Please try again.", ToastLength.Long).Show ();
+//			}
 			//FragmentTransaction transaction = FragmentManager.BeginTransaction ();
 			//test simplepage = new test ();
 			//simplepage.Show (transaction, "hello world");
 
+            foreach (JsonObject j in list)
+            {
+                string un = j["username"];
+                string pw = j["password"];
 
+                if (username.Equals(un) && password.Equals(pw))
+                {
+                    test = false;
+                    Intent intent = new Intent(this, typeof(NavigationDrawerActivity));
+                    this.StartActivity(intent);
+                }
+            }
 
-
+            if (test)
+            {
+                Toast.MakeText(this, "Invalid account! Please try again.", ToastLength.Long).Show();
+            }
 		}
-
 	}
 }
