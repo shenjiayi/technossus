@@ -21,13 +21,11 @@ namespace NavigationDrawer
 {
 	public class ClientDetailFragment : Fragment
 	{
-		string _name;
-		string _email;
+        private readonly client c;
 
-		public ClientDetailFragment(string name, string email)
+        public ClientDetailFragment(client c)
 		{
-			_name = name;
-			_email = email;
+            this.c = c;
 		}
 
 
@@ -36,11 +34,12 @@ namespace NavigationDrawer
 			View rootView = inflater.Inflate (Resource.Layout.ClientDetail, container, false);
 
 			TextView ClientName = rootView.FindViewById<TextView> (Resource.Id.ClientName);
+            TextView ContactName = rootView.FindViewById<TextView>(Resource.Id.ContactName);
 			TextView ContactEmail = rootView.FindViewById<TextView> (Resource.Id.ContactEmail);
 
-			ClientName.Text = "Client Name: "+ _name;
-			ContactEmail.Text = "Contact Email: " + _email;
-
+			ClientName.Text = "Client Name: " + c.name;
+            ContactName.Text = "Contact Name: " + c.contactName;
+            ContactEmail.Text = "Contact Email: " + c.contactEmail;
 			return rootView;
 		}
 	}

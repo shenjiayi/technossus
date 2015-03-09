@@ -10,10 +10,18 @@
     android:paddingRight="20dp"
     android:paddingTop="20dp">
     <TextView
-        android:text="Client Name:"
+        android:text="Client:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ClientName"
+        android:layout_weight="10"
+        android:textSize="50px"
+        android:textColor="#ffffff" />
+    <TextView
+        android:text="Contact Name:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ContactName"
         android:layout_weight="10"
         android:textSize="50px"
         android:textColor="#ffffff" />
@@ -34,7 +42,7 @@
         android:textSize="50px"
         android:textColor="#ffffff" />
     <TextView
-        android:text="Porject List:"
+        android:text="Project List:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/Projectlist"

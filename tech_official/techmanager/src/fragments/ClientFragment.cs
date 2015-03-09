@@ -52,7 +52,7 @@ namespace NavigationDrawer
 		public override void OnListItemClick (ListView l, View v, int position, long id)
 		{
 			base.OnListItemClick (l, v, position, id);
-			Fragment fragment = new ClientDetailFragment(allclient[position].contactName,allclient[position].contactEmail);
+			Fragment fragment = new ClientDetailFragment(allclient[position]);
 			Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction ();
 			transaction.Replace (Resource.Id.content_frame, fragment);
 			transaction.AddToBackStack (null);
