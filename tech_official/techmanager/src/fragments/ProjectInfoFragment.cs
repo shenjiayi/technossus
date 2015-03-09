@@ -22,18 +22,26 @@ namespace NavigationDrawer
 {
 	public class ProjectInfoFragment : Fragment
 	{
+		project projectinfo;
+
+		public ProjectInfoFragment(project data){
+			projectinfo = data;
+		}
+
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
     		View rootView = inflater.Inflate (Resource.Layout.ProjectInfo, container, false);
-    		List <employee> teamMember = new List<employee> () {
-    			new employee (0, null, "Jone", "2014/3/2","Java"),
-    			new employee (0, null, "James", "2014/4/6","Java"),
-    			new employee (0, null, "Kate", "2015/3/1","Java")
-    		};
+//    		List <employee> teamMember = new List<employee> () {
+//    			new employee (0, null, "Jone", "2014/3/2","Java"),
+//    			new employee (0, null, "James", "2014/4/6","Java"),
+//    			new employee (0, null, "Kate", "2015/3/1","Java")
+//    		};
+//
+//    		List <string> technology = new List<string> { "java", "c#", "html" };
+//
+//    		project project1 = new project (0, "Web Design", "Technossus","2014/02/24", "2015/07/23", teamMember, technology,"Design a website");
 
-    		List <string> technology = new List<string> { "java", "c#", "html" };
 
-    		project project1 = new project (0, "Web Design", "Technossus","2014/02/24", "2015/07/23", teamMember, technology,"Design a website");
 
 
     		TextView ClientName = rootView.FindViewById<TextView> (Resource.Id.ClientName);
@@ -44,12 +52,12 @@ namespace NavigationDrawer
     		TextView Technology = rootView.FindViewById<TextView> (Resource.Id.Technology);
     		TextView Desciption = rootView.FindViewById<TextView> (Resource.Id.Desciption);
 
-    		ClientName.Text = "Client Name: "+ project1.client;
-            StartData.Text = "Start Date: "+ project1.startDate.Date.ToString("d");
-            EndData.Text = "End Date: "+ project1.endDate.Date.ToString("d");
-            DaysLeft.Text = "Days Left: " + (project1.endDate - DateTime.Today).TotalDays;
-            Technology.Text = "Technology:\n" + computeTechnologyString(project1);
-    		Desciption.Text = "Desciption:\n" + project1.description;
+			ClientName.Text = "Client Name: "+ projectinfo.client;
+			StartData.Text = "Start Date: "+ projectinfo.startDate.Date.ToString("d");
+			EndData.Text = "End Date: "+ projectinfo.endDate.Date.ToString("d");
+			DaysLeft.Text = "Days Left: " + (projectinfo.endDate - DateTime.Today).TotalDays;
+			Technology.Text = "Technology:\n" + computeTechnologyString(projectinfo);
+			Desciption.Text = "Desciption:\n" + projectinfo.description;
 
     		return rootView;
     	}

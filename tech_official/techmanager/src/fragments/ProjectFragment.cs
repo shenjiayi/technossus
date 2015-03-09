@@ -29,15 +29,11 @@ namespace NavigationDrawer
 
 		List<project> allproject;
 
-
-		string [] menu_item = {"Dashboard", "Web Design","Mobile App","Database design","People", "Clients", "Projects"};
-
-		List<employee> allemployee = new List<employee> () {
-			new employee (0, null, "Alice", "2015/3/1","Jave"),new employee (0, null, "Anteater", "2015/3/1","Jave"),new employee (0, null, "Ben", "2015/3/1","Jave"),	
-			new employee (0, null, "James", "2014/4/6","Jave"), new employee (0, null, "Jone", "2014/3/2","Jave"),new employee (0, null, "Kate", "2015/3/1","Jave"),
-			new employee (0, null, "Kitty", "2015/3/1","Jave"),new employee (0, null, "Peter", "2015/3/1","Jave"), 
-			new employee (0, null, "Sam", "2015/3/1","Jave"),new employee (0, null, "Smith", "2015/3/1","Jave"), 
-
+		List<post> allpost = new List<post> () {
+			new post (0, null,"Added Jone Smith to the project", "Peter Anteater", "Web Design", "technossus", "2014/2/12"),
+			new post (0, null,"Looking forward to working on the project", "Jone Smith", "Web Design", "technossus", "2014/2/14"),
+			new post (0, null,"Meeting tommorow", "Peter Anteater", "Web Design", "technossus", "2014/3/12"),
+			new post (0, null,"Just commit my changes", "Kate Chen", "Web Design", "technossus", "2014/5/12")
 		};
 
 
@@ -81,42 +77,33 @@ namespace NavigationDrawer
 
 		}
 
-//		public override void OnListItemClick (ListView l, View v, int position, long id)
-//		{
-//			base.OnListItemClick (l, v, position, id);
-//			switch (position) {
-//				case 0: // Project 1
-//					Activity.ActionBar.RemoveAllTabs ();
-//				this.Activity.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-//					addTab ("Info", new ProjectInfoFragment ());
-//					addTab ("Dashboard", new PostFragment ());
-//					addTab ("Teammate", new PeopleFragment (allemployee));
-//
-////					Title = menu_item [position];
-//					break;
-//				case 1: // Project 2
-//					break;
-//				case 2: // Project 3
-//					break;
-//			}
-//
-//		}
+		public override void OnListItemClick (ListView l, View v, int position, long id)
+		{
+			base.OnListItemClick (l, v, position, id);
+			switch (position) {
+				case 0: // Project 1
+					break;
+				case 1: // Project 2
+					break;
+				case 2: // Project 3
+					Activity.ActionBar.RemoveAllTabs ();
+					this.Activity.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
+					addTab ("Info", new ProjectInfoFragment (allproject[position]));
+					addTab ("Dashboard", new PostFragment (allpost));
+					addTab ("Teammate", new PeopleFragment (allproject[position].teamMember));
+					break;
+			}
 
+		}
+			
 		void addTab (string tabText, Fragment view)
 		{
 			var tab = this.Activity.ActionBar.NewTab ();
 			tab.SetText (tabText);
 			tab.TabSelected += delegate(object sender, ActionBar.TabEventArgs e) {
-				var framgent = this.FragmentManager.FindFragmentById (Resource.Id.content_frame);
-				if (framgent != null)
-					e.FragmentTransaction.Remove (framgent);
-				e.FragmentTransaction.Add (Resource.Id.content_frame, view);
-			};
-			tab.TabUnselected += delegate(object sender, ActionBar.TabEventArgs e) {
-				e.FragmentTransaction.Remove(view);
+				e.FragmentTransaction.Replace(Resource.Id.content_frame,view);
 			};
 			this.Activity.ActionBar.AddTab (tab);
 		}
-
 	}
 }

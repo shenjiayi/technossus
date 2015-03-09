@@ -64,21 +64,20 @@ namespace NavigationDrawer
 			new client(0,null,"CompanyName","Peter Anteater","peteranteater@uci.edu"),
 			new client(0,null,"SpaceX","Mark Smith","marksmith@spaceX.com")};
 
-		string [] menu_item = {"Dashboard", "Web Design","Mobile App","Database design","People", "Clients", "Projects","Log out"};
+		string [] menu_item = {"Dashboard", "Mobile App","Database Design","Web Design","People", "Clients", "Projects","Log out"};
 
 		//project 1 data
-		static List <employee> teamMember1 = new List<employee> () {
+		static List <employee> teamMember3 = new List<employee> () {
 			new employee (0, null, "James", "2014/4/6","c++"),
 			new employee (0, null, "Jone", "2014/3/2","Java"),
 			new employee (0, null, "Kate", "2015/3/1","Python")
 		};
-		static List <string> technology1 = new List<string> { "java", "c#", "html" };
+		static List <string> technology3 = new List<string> { "java", "c#", "html" };
 
 		List <project> allproject1 = new List<project> () {
-			new project (0, "Database", "Apple", "2014/03/27", "2015/01/23", teamMember1, technology1,""),
-			new project (0, "Mobile App", "UCI", "2014/06/24", "2015/05/23", teamMember1, technology1,""),
-			new project (0, "Project Name", "SpaceX", "2014/03/24", "2015/07/23", teamMember1, technology1,""),
-			new project (0, "Web Design", "Technossus","2014/02/24", "2015/07/23", teamMember1, technology1,"")
+			new project (0, "Database Design", "Apple", "2014/03/27", "2014/09/23", teamMember3, technology3,""),
+			new project (0, "Mobile App", "UCI", "2014/06/24", "2015/05/23", teamMember3, technology3,""),
+			new project (0, "Web Design", "Technossus","2014/02/24", "2015/07/23", teamMember3, technology3,"Design a website")
 
 		};
 
@@ -200,19 +199,19 @@ namespace NavigationDrawer
 				mDrawerLayout.CloseDrawer (mDrawerList);
 				break;
 			case 1: // Project 1
-				ActionBar.RemoveAllTabs ();
-				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				List<post> data = filterpost (menu_item [position], allpost);
-				addTab ("Info", new ProjectInfoFragment ());
-				addTab ("Dashboard", new PostFragment (data));
-				addTab ("Teammate", new PeopleFragment (allemployee));
 
-				Title = menu_item [position];
-				mDrawerLayout.CloseDrawer (mDrawerList);
 				break;
 			case 2: // Project 2
 				break;
 			case 3: // Project 3
+				ActionBar.RemoveAllTabs ();
+				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
+				List<post> data = filterpost (menu_item [position], allpost);
+				addTab ("Info", new ProjectInfoFragment (allproject1[2]));
+				addTab ("Dashboard", new PostFragment (data));
+				addTab ("Teammate", new PeopleFragment (allproject1[2].teamMember));
+				Title = menu_item [position];
+				mDrawerLayout.CloseDrawer (mDrawerList);
 				break;
 			case 4: // People Screen
 				// update the main content by replacing fragments
