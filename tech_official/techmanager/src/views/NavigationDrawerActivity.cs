@@ -63,7 +63,7 @@ namespace NavigationDrawer
 
 		static List <string> technology1 = new List<string> { "SQL", ".NET", "html" };
 		static List <string> technology2 = new List<string> { "java", "c#", "html" };
-		static List <string> technology3 = new List<string> { "C++", "c#", "css", "Linex" };
+		static List <string> technology3 = new List<string> { "C++", "c#", "css", "Linux" };
 
 
 
@@ -372,7 +372,7 @@ namespace NavigationDrawer
 				// Two cases, either all will be let through, or only those that are your client (FULL/PARTIAL)
 				if (arg.Equals("ALL") || j["your_people"])
 				{
-					people_list.Add(new employee(j["id"], null, j["name"], j["avail"], null));
+                    people_list.Add(new employee(j["id"], null, j["name"], j["avail"], "Java, C#, SQL, Linux"));
 				}
 			}
 
@@ -380,7 +380,6 @@ namespace NavigationDrawer
 
             return ordered_people_list;
 		}
-
 	}
 }
 
