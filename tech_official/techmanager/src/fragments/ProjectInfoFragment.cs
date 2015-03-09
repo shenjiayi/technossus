@@ -43,7 +43,7 @@ namespace NavigationDrawer
 			ClientName.Text = "Client Name: "+ projectinfo.client;
 			StartData.Text = "Start Date: "+ projectinfo.startDate.Date.ToString("d");
 			EndData.Text = "End Date: "+ projectinfo.endDate.Date.ToString("d");
-			DaysLeft.Text = "Days Left: " + (projectinfo.endDate - DateTime.Today).TotalDays;
+            DaysLeft.Text = "Days Left: " + ComputeDaysLeft(projectinfo.endDate);
 			Technology.Text = "Technology:\n" + computeTechnologyString(projectinfo);
 			Desciption.Text = "Desciption:\n" + projectinfo.description;
 
@@ -68,6 +68,21 @@ namespace NavigationDrawer
             }
 
             return sb.ToString();
+        }
+
+        private double ComputeDaysLeft(DateTime end)
+        {
+            double days;
+
+            if ((days = (end - DateTime.Today).TotalDays) > 0)
+            {
+                return days;
+            }
+            else
+            {
+                // Project is over
+                return 0;
+            }
         }
 	}
 }
