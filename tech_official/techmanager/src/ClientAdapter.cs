@@ -154,7 +154,9 @@ namespace NavigationDrawer
 
             private bool QueryTokenClient(client c, string query)
             {
-                return (c.name.ToLower().Contains(query) || c.contactName.ToLower().Contains(query) || c.contactEmail.ToLower().Contains(query));
+				return ((c.name != null && c.name.ToLower().Contains(query)) 
+					|| (c.contactName != null && c.contactName.ToLower().Contains(query)) 
+					|| (c.contactEmail != null && c.contactEmail.ToLower().Contains(query)));
             }
 		}
 

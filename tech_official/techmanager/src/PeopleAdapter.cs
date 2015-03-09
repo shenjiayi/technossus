@@ -159,7 +159,9 @@ namespace NavigationDrawer
 
             private bool QueryTokenEmployee(employee e, string query)
             {
-                return (e.name.ToLower().Contains(query) || e.technology.ToLower().Contains(query) || DateUtil.isDuringMonth(e.available, query));
+				return ((e.name != null && e.name.ToLower().Contains(query))
+					|| (e.technology !=null && e.technology.ToLower().Contains(query))
+					|| DateUtil.isDuringMonth(e.available, query));
             }
 		}
 	}

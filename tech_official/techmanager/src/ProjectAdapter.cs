@@ -142,9 +142,9 @@ namespace NavigationDrawer
             // Query individual term in project
             private bool QueryTokenProject(project p, string query)
             {
-                if (p.name.ToLower().Contains(query) 
-                    || p.client.ToLower().Contains(query) 
-                    || p.description.ToLower().Contains(query) 
+				if ((p.name != null && p.name.ToLower().Contains(query))
+					|| (p.client != null && p.client.ToLower().Contains(query)) 
+					|| (p.description != null && p.description.ToLower().Contains(query))
                     || DateUtil.isDuringMonth(p.startDate, query) 
                     || DateUtil.isDuringMonth(p.endDate,query))
                     return true;
