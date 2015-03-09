@@ -39,56 +39,49 @@ namespace NavigationDrawer
 
 
 		//make sure they are in alphebetical order for now
-		List<employee> allemployee = new List<employee> () {
-			new employee (0, null, "Alice", "2015/3/1","Jave"),new employee (0, null, "Anteater", "2015/3/1","Jave"),new employee (0, null, "Ben", "2015/3/1","Jave"),	
-			new employee (0, null, "James", "2014/4/6","Jave"), new employee (0, null, "Jone", "2014/3/2","Jave"),new employee (0, null, "Kate", "2015/3/1","Jave"),
-			new employee (0, null, "Kitty", "2015/3/1","Jave"),new employee (0, null, "Peter", "2015/3/1","Jave"), 
-			new employee (0, null, "Sam", "2015/3/1","Jave"),new employee (0, null, "Smith", "2015/3/1","Jave"), 
+		List<employee> allpeople;
+		List<employee> peopelpartial;
+		List<client> allclient;
+		List<client> clientpartial;
 
-		};
-
-		List<employee> employeepartial = new List<employee> () {
-			new employee (0, null, "Alice", "2015/3/1","Jave"),new employee (0, null, "Anteater", "2015/3/1","Jave"),new employee (0, null, "Ben", "2015/3/1","Jave"),	
-			new employee (0, null, "James", "2014/4/6","Jave"), new employee (0, null, "Jone", "2014/3/2","Jave")
-		};
-
-		List<client> allclient = new List<client> ()
-		{
-			new client(0,null,"Apple","Mark Smith","marksmith@spaceX.com"),
-			new client(0,null,"CompanyName","Peter Anteater","peteranteater@uci.edu"),
-			new client(0,null,"Dell","Alice bLALA","alice@uci.edu"),
-			new client(0,null,"SpaceX","Mark Smith","marksmith@spaceX.com")};
-
-		List<client> clientpartial = new List<client> ()
-		{
-			new client(0,null,"CompanyName","Peter Anteater","peteranteater@uci.edu"),
-			new client(0,null,"SpaceX","Mark Smith","marksmith@spaceX.com")};
 
 		string [] menu_item = {"Dashboard", "Mobile App","Database Design","Web Design","People", "Clients", "Projects","Log out"};
 
 		//project 1 data
-		static List <employee> teamMember3 = new List<employee> () {
-			new employee (0, null, "James", "2014/4/6","c++"),
-			new employee (0, null, "Jone", "2014/3/2","Java"),
-			new employee (0, null, "Kate", "2015/3/1","Python")
+		static List <employee> teamMember1 = new List<employee> () {
+			new employee (0, null, "Anteater", "2015/2/20","c++"),
+			new employee (0, null, "James", "2015/1/20","Java"),
 		};
-		static List <string> technology3 = new List<string> { "java", "c#", "html" };
+		static List <employee> teamMember2 = new List<employee> () {
+			new employee (0, null, "Anteater","2015/2/20","c++"),
+			new employee (0, null, "Carrie", "2015/5/20","Java"),
+		};
+		static List <employee> teamMember3 = new List<employee> () {
+			new employee (0, null, "Anteater", "2015/2/20","c++"),
+			new employee (0, null, "James", "2015/1/20","Java"),
+		};
 
-		List <project> allproject1 = new List<project> () {
-			new project (0, "Database Design", "Apple", "2014/03/27", "2014/09/23", teamMember3, technology3,""),
-			new project (0, "Mobile App", "UCI", "2014/06/24", "2015/05/23", teamMember3, technology3,""),
-			new project (0, "Web Design", "Technossus","2014/02/24", "2015/07/23", teamMember3, technology3,"Design a website")
+		static List <string> technology1 = new List<string> { "SQL", ".NET", "html" };
+		static List <string> technology2 = new List<string> { "java", "c#", "html" };
+		static List <string> technology3 = new List<string> { "C++", "c#", "css", "Linex" };
 
+
+
+		List <project> allproject = new List<project> () {
+			new project (0, "Database Design", "Apple", "2014/03/27", "2014/09/23", teamMember1, technology1,""),
+			new project (0, "Mobile App", "Dell", "2015/02/24", "2015/05/23", teamMember2, technology2,""),
+			new project (0, "Web Design", "SpaceX","2014/02/24", "2015/07/23", teamMember3, technology3,"Design a website")
 		};
 
 
 		List<post> allpost = new List<post> () {
-			new post (0, null,"Added Jone Smith to the project", "Peter Anteater", "Web Design", "technossus", "2014/2/12"),
-			new post (0, null,"Added Ada Smith to the project", "Peter Anteater", "Mobile App", "technossus", "2014/2/12"),
-			new post (0, null,"Looking forward to working on the project", "Jone Smith", "Web Design", "technossus", "2014/2/14"),
-			new post (0, null,"Meeing at 9:30", "Peter Anteater", "Mobile App", "technossus", "2014/2/15"),
-			new post (0, null,"Meeting tommorow", "Peter Anteater", "Web Design", "technossus", "2014/3/12"),
-			new post (0, null,"Just commit my changes", "Kate Chen", "Web Design", "technossus", "2014/5/12")
+			new post (0, null,"Added Carrie to the project", "Peter Anteater", "Web Design", "SpaceX", "2014/2/12"),
+			new post (0, null,"Added James to the project", "Peter Anteater", "Mobile App", "Dell", "2014/2/12"),
+			new post (0, null,"Looking forward to working on the project", "Jone Smith", "Web Design", "SpaceX", "2014/2/14"),
+			new post (0, null,"Meeing at 9:30", "Peter Anteater", "Mobile App", "Dell", "2014/2/15"),
+			new post (0, null,"Added Ada the project", "Peter Anteater", "Database Design", "SpaceX", "2014/3/27"),
+			new post (0, null,"Meeting tommorow", "Peter Anteater", "Web Design", "SpaceX", "2014/3/12"),
+			new post (0, null,"Just commit my changes", "Kate Chen", "Web Design", "SpaceX", "2014/5/12")
 		};
 
 
@@ -187,6 +180,12 @@ namespace NavigationDrawer
 
 		private void selectItem (int position)
 		{
+			allpeople = LoadPeopleData("ALL");
+			peopelpartial = LoadPeopleData("PARTIAL");
+			allclient = LoadClientData("ALL");
+			clientpartial =LoadClientData("PARTIAL");
+			List<post> data;
+
 			switch (position) {
 			case 0: // main dashboard
 				ActionBar.RemoveAllTabs ();
@@ -199,55 +198,73 @@ namespace NavigationDrawer
 				mDrawerLayout.CloseDrawer (mDrawerList);
 				break;
 			case 1: // Project 1
-
+				ActionBar.RemoveAllTabs ();
+				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
+				data = filterpost (menu_item [position], allpost);
+				addTab ("Info", new ProjectInfoFragment (allproject[0]));
+				addTab ("Dashboard", new PostFragment (data));
+				addTab ("Teammate", new PeopleFragment (allproject[0].teamMember));
+				Title = menu_item [position];
+				mDrawerLayout.CloseDrawer (mDrawerList);
 				break;
 			case 2: // Project 2
+				ActionBar.RemoveAllTabs ();
+				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
+				data = filterpost (menu_item [position], allpost);
+				addTab ("Info", new ProjectInfoFragment (allproject[1]));
+				addTab ("Dashboard", new PostFragment (data));
+				addTab ("Teammate", new PeopleFragment (allproject[1].teamMember));
+				Title = menu_item [position];
+				mDrawerLayout.CloseDrawer (mDrawerList);
 				break;
+
+
 			case 3: // Project 3
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				List<post> data = filterpost (menu_item [position], allpost);
-				addTab ("Info", new ProjectInfoFragment (allproject1[2]));
+				data = filterpost (menu_item [position], allpost);
+				addTab ("Info", new ProjectInfoFragment (allproject[2]));
 				addTab ("Dashboard", new PostFragment (data));
-				addTab ("Teammate", new PeopleFragment (allproject1[2].teamMember));
+				addTab ("Teammate", new PeopleFragment (allproject[2].teamMember));
 				Title = menu_item [position];
 				mDrawerLayout.CloseDrawer (mDrawerList);
 				break;
+
+
 			case 4: // People Screen
-				// update the main content by replacing fragments
 				ActionBar.RemoveAllTabs ();
 				ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				addTab ("All people", new PeopleFragment (LoadPeopleData("ALL")));
-				addTab ("Teammates", new PeopleFragment (LoadPeopleData("PARTIAL")));
+				addTab ("All people", new PeopleFragment (allpeople));
+				addTab ("Teammates", new PeopleFragment (peopelpartial));
 
 				// update selected item title, then close the drawer
 				Title = menu_item [position];
 				mDrawerLayout.CloseDrawer (mDrawerList);
-
 				break;
+
 			case 5: // Client Screen
-				// update the main content by replacing fragments
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-                addTab ("All Clients", new ClientFragment (LoadClientData("ALL")));
-                addTab ("Your Clients", new ClientFragment (LoadClientData("PARTIAL")));
+				addTab ("All Clients", new ClientFragment (allclient));
+				addTab ("Your Clients", new ClientFragment (clientpartial));
 
 				// update selected item title, then close the drawer
 				Title = menu_item [position];
 				mDrawerLayout.CloseDrawer (mDrawerList);
-
 				break;
+
 			case 6: // Project Screen
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				addTab ("All Clients", new ProjectFragment (allproject1));
-				addTab ("Your Clients", new ProjectFragment (allproject1));
+				addTab ("All Clients", new ProjectFragment (allproject,allpost));
+				addTab ("Your Clients", new ProjectFragment (allproject,allpost));
 
 				// update selected item title, then close the drawer
 				Title = menu_item [position];
 				mDrawerLayout.CloseDrawer (mDrawerList);
 				break;
-			case 7:
+
+			case 7: //logout 
 				base.OnBackPressed ();
 				break;
 			}

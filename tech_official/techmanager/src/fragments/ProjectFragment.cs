@@ -29,16 +29,12 @@ namespace NavigationDrawer
 
 		List<project> allproject;
 
-		List<post> allpost = new List<post> () {
-			new post (0, null,"Added Jone Smith to the project", "Peter Anteater", "Web Design", "technossus", "2014/2/12"),
-			new post (0, null,"Looking forward to working on the project", "Jone Smith", "Web Design", "technossus", "2014/2/14"),
-			new post (0, null,"Meeting tommorow", "Peter Anteater", "Web Design", "technossus", "2014/3/12"),
-			new post (0, null,"Just commit my changes", "Kate Chen", "Web Design", "technossus", "2014/5/12")
-		};
+		List<post> allpost;
 
 
-		public ProjectFragment(List<project> data){
+		public ProjectFragment(List<project> data, List<post> data1){
 			allproject = data;
+			allpost = data1;
 		}
 
 
@@ -79,20 +75,18 @@ namespace NavigationDrawer
 
 		public override void OnListItemClick (ListView l, View v, int position, long id)
 		{
+
+
 			base.OnListItemClick (l, v, position, id);
-			switch (position) {
-				case 0: // Project 1
-					break;
-				case 1: // Project 2
-					break;
-				case 2: // Project 3
-					Activity.ActionBar.RemoveAllTabs ();
-					this.Activity.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-					addTab ("Info", new ProjectInfoFragment (allproject[position]));
-					addTab ("Dashboard", new PostFragment (allpost));
-					addTab ("Teammate", new PeopleFragment (allproject[position].teamMember));
-					break;
-			}
+
+			List<post> data;
+			Activity.ActionBar.RemoveAllTabs ();
+			Activity.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
+			data = filterpost (allproject[position].name, allpost);
+			addTab ("Info", new ProjectInfoFragment (allproject[position]));
+			addTab ("Dashboard", new PostFragment (data));
+			addTab ("Teammate", new PeopleFragment (allproject[position].teamMember));
+			Activity.Title =allproject[position].name;
 
 		}
 			
@@ -104,6 +98,16 @@ namespace NavigationDrawer
 				e.FragmentTransaction.Replace(Resource.Id.content_frame,view);
 			};
 			this.Activity.ActionBar.AddTab (tab);
+		}
+
+		public List<post> filterpost (string projectname, List<post> allpost)
+		{
+			List<post> result = new List<post>{};
+			foreach (post item in allpost){
+				if (item.project == projectname)
+					result.Add (item);
+			}
+			return result;
 		}
 	}
 }

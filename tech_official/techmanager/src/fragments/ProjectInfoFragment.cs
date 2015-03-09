@@ -31,18 +31,6 @@ namespace NavigationDrawer
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
     		View rootView = inflater.Inflate (Resource.Layout.ProjectInfo, container, false);
-//    		List <employee> teamMember = new List<employee> () {
-//    			new employee (0, null, "Jone", "2014/3/2","Java"),
-//    			new employee (0, null, "James", "2014/4/6","Java"),
-//    			new employee (0, null, "Kate", "2015/3/1","Java")
-//    		};
-//
-//    		List <string> technology = new List<string> { "java", "c#", "html" };
-//
-//    		project project1 = new project (0, "Web Design", "Technossus","2014/02/24", "2015/07/23", teamMember, technology,"Design a website");
-
-
-
 
     		TextView ClientName = rootView.FindViewById<TextView> (Resource.Id.ClientName);
     		TextView ContactEmail = rootView.FindViewById<TextView> (Resource.Id.ContactEmail);
