@@ -5,7 +5,10 @@
     android:layout_height="fill_parent"
     android:weightSum="100"
     android:minWidth="25px"
-    android:minHeight="25px">
+    android:minHeight="25px"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp">
     <TextView
         android:text="Client Name:"
         android:layout_width="match_parent"

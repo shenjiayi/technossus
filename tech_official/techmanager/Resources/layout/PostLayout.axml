@@ -5,7 +5,9 @@
     android:layout_height="fill_parent"
     android:id="@+id/background"
     android:minWidth="25px"
-    android:minHeight="25px">
+    android:minHeight="25px"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
     <RelativeLayout
         android:layout_centerVertical="true"
         android:paddingLeft="4dp"
@@ -24,8 +26,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/project"
-            android:layout_below="@+id/picture"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:paddingLeft="dp"
+            android:layout_above="@+id/content"
+            android:layout_below="@+id/name"
+            android:layout_toRightOf="@+id/picture" />
         <TextView
             android:text="Name"
             android:layout_width="wrap_content"

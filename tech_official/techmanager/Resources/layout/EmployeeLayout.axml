@@ -5,7 +5,9 @@
     android:layout_height="fill_parent"
     android:id="@+id/background"
     android:minWidth="25px"
-    android:minHeight="25px">
+    android:minHeight="25px"
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp">
     <RelativeLayout
         android:layout_centerVertical="true"
         android:paddingLeft="4dp"
@@ -18,7 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_alignParentLeft="true"
-            android:id="@+id/picture" />
+            android:id="@+id/picture"
+            android:paddingRight="10dp" />
         <TextView
             android:text="Name"
             android:layout_width="wrap_content"
