@@ -119,6 +119,8 @@ namespace NavigationDrawer
 				Resource.String.drawer_close);
 
 			mDrawerLayout.SetDrawerListener (mDrawerToggle);
+			if (savedInstanceState == null) //first launch
+				selectItem (0);
 		}
 
 		internal class MyActionBarDrawerToggle : ActionBarDrawerToggle
@@ -189,6 +191,7 @@ namespace NavigationDrawer
 			switch (position) {
 			case 0: // main dashboard
 				ActionBar.RemoveAllTabs ();
+				ActionBar.NavigationMode = ActionBarNavigationMode.Standard;
 				var fragmentManger = this.FragmentManager;
 				var ft = fragmentManger.BeginTransaction ();
 				ft.Replace (Resource.Id.content_frame, new PostFragment(allpost));
