@@ -66,8 +66,8 @@ namespace NavigationDrawer
 		static List <string> technology3 = new List<string> { "C++", "c#", "css", "Linux" };
 
 
-
 		List <project> allproject = new List<project> () {
+
 			new project (0, "Database Design", "Apple", "2014/03/27", "2014/09/23", teamMember1, technology1,""),
 			new project (0, "Mobile App", "Dell", "2015/02/24", "2015/05/23", teamMember2, technology2,""),
 			new project (0, "Web Design", "SpaceX","2014/02/24", "2015/07/23", teamMember3, technology3,"Design a website")
@@ -105,6 +105,7 @@ namespace NavigationDrawer
 			mDrawerList.SetLayoutManager (new LinearLayoutManager (this));
 
 			// set up the drawer's list view with items and click listener
+			allproject = LoadSideBarProjectData ();
 			string[] menu_item = new string[allproject.Count+5];
 			menu_item[0] = "Dashboard";
 			for (int i = 0; i < allproject.Count; ++i) {
@@ -217,7 +218,7 @@ namespace NavigationDrawer
 			else if (position > 0 && position < allproject.Count + 1) {
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				data = filterpost (allproject [position - 1].name, allpost);
+				data = filterpost (allproject [position - 1].name, LoadDashProjectData());
 				addTab ("Info", new ProjectInfoFragment (allproject [position - 1]));
 				addTab ("Dashboard", new PostFragment (data));
 				addTab ("Teammate", new PeopleFragment (allproject [position - 1].teamMember));
@@ -362,7 +363,45 @@ namespace NavigationDrawer
 
             return ordered_people_list;
 		}
+			
+
+		private List<post> LoadDashProjectData()
+		{
+			List<post> post = new List<post>();
+			var jl = new JsonLoader();
+			JsonValue data = jl.LoadData(this, "myprojects.json");
+			var list = (JsonArray) data["myprojectsdash"];
+
+			foreach (JsonObject j in list)
+			{
+				post.Add(new post(j["id"], j["photo"], j["content"], j["name"], j["projectname"], j["companyname"], j["date"]));
+			}
+
+			List<post> ordered_post_list = post.OrderBy(x => x.name).ToList();
+
+			return ordered_post_list;
+		}
+
+
+		private List<project> LoadSideBarProjectData()
+		{
+
+			List<project> projects = new List<project>();
+			var jl = new JsonLoader();
+			JsonValue data = jl.LoadData(this, "myprojects.json");
+			var list = (JsonArray) data["myprojectsside"];
+
+			foreach (JsonObject j in list)
+			{
+				projects.Add(new project(j["id"], j["projectname"], j["comp"], j["start"], j["end"], teamMember1, technology1, ""));
+			}
+
+			List<project> ordered_proj_list = projects.OrderBy(x => x.name).ToList();
+
+			return ordered_proj_list;
+		}
 	}
+
 }
 
 

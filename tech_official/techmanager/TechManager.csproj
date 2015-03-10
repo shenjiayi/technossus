@@ -142,9 +142,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\clients.json" />
-    <AndroidAsset Include="Assets\project1.json" />
     <AndroidAsset Include="Assets\people.json" />
     <AndroidAsset Include="Assets\login.json" />
+    <AndroidAsset Include="Assets\myprojects.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\util\" />

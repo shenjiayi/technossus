@@ -1,0 +1,18 @@
+﻿{
+	"myprojectsdash":[
+				{"id" : 0, "photo" : null, "content" : "Added Carrie to the project", "name" : "Peter", "projectname" : "AI Project", "companyname": "SpaceX", "date" : "2014/2/12"},
+				{"id" : 0, "photo" : null, "content" : "Added James to the project", "name" : "Peter Anteater", "projectname" : "Mobile App", "companyname" : "Dell", "date" : "2014/2/12"},
+				{"id" : 0, "photo" : null, "content" : "Looking forward to working on the project", "name" : "Jone Smith", "projectname" : "Web Design", "companyname" : "SpaceX", "date" : "2014/2/12"},
+				{"id" : 0, "photo" : null, "content" : "Meeting at 9:30", "name" : "Peter Anteater", "projectname" : "Database Design", "companyname" : "Dell", "date" : "2014/2/12"},
+				{"id" : 0, "photo" : null, "content" : "Meeting tomorrow", "name" : "Peter Anteater", "projectname" : "Web Design", "companyname" : "Dell", "date" : "2014/2/12"},
+				{"id" : 0, "photo" : null, "content" : "Just commit my changes", "name" : "Kate Chen", "projectname" : "Web Design", "companyname" : "SpaceX", "date" : "2014/2/12"},
+				{"id" : 0, "photo" : null, "content" : "Added Ada to the project", "name" : "Peter Anteater", "projectname" : "Database Design", "companyname" : "Microsoft", "date" : "2014/2/12"}],
+
+	"myprojectsside":[
+				{"id" : 0, "projectname" : "Database Design", "comp" : "Apple", "start" : "2014/03/27", "end" : "2014/09/23"},
+				{"id" : 0, "projectname" : "Mobile App", "comp" : "Dell", "start" : "2015/02/24", "end" : "2015/05/23"},
+				{"id" : 0, "projectname" : "Web Design", "comp" : "SpaceX","start" : "2014/02/24", "end" : "2015/07/23"},
+				{"id" : 0, "projectname" : "AI Project", "comp" : "SpaceX","start" : "2014/02/24", "end" : "2015/07/23"}]
+}
+
+
