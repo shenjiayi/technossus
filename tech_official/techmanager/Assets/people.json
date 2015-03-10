@@ -1,10 +1,10 @@
 ﻿{
 	"people_list" : [
-		{ "avail" : "2015/1/20", "name" : "James", "id" : 1, "your_people" : true },
-		{ "avail" : "2015/2/20", "name" : "Anteater", "id" : 2, "your_people" : true },
-		{ "avail" : "2015/3/20", "name" : "Jay", "id" : 3, "your_people" : false },
-		{ "avail" : "2015/4/20", "name" : "Ryan", "id" : 4, "your_people" : false },
-		{ "avail" : "2015/5/20", "name" : "Carrie", "id" : 5, "your_people" : true },
-		{ "avail" : "2015/6/20", "name" : "Ada", "id" : 6, "your_people" : false }
+		{ "avail" : "2015/1/20", "name" : "James", "id" : 1, "your_people" : true , "technology" : "SQL, .NET, html" },
+		{ "avail" : "2015/2/20", "name" : "Anteater", "id" : 2, "your_people" : true , "technology" : "Java, C#, Linux" },
+		{ "avail" : "2015/3/20", "name" : "Jay", "id" : 3, "your_people" : false , "technology" : "Java, SQL, linux" },
+		{ "avail" : "2015/4/20", "name" : "Ryan", "id" : 4, "your_people" : false , "technology" : "C++, C, Assembly" },
+		{ "avail" : "2015/5/20", "name" : "Carrie", "id" : 5, "your_people" : true , "technology" : "Java, SQL, UI/UX" },
+		{ "avail" : "2015/6/20", "name" : "Ada", "id" : 6, "your_people" : false , "technology" : "SQL, .NET, html" }
 	]
 }

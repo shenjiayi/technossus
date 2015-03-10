@@ -1,3 +1,9 @@
-﻿{
-	"username":["Ryan", "Jay", "Ada", "Carrie", "James", "t"], 
-	"password":["ryanpw", "jaypw", "adapw", "carriepw", "jamespw", "t"] }
+{
+	"valid_users" : [
+		{ "username" : "t"     , "password" : "t"},
+		{ "username" : "James" , "password" : "jamespw"},
+		{ "username" : "Ryan"  , "password" : "ryanpw"},
+		{ "username" : "Carrie", "password" : "carriepw"},
+		{ "username" : "Ada"   , "password" : "adapw"}
+	]
+}

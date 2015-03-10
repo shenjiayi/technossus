@@ -114,7 +114,8 @@ namespace NavigationDrawer
 			menu_item[allproject.Count+3] = "Projects";
 			menu_item[allproject.Count+4] = "Log out";
 
-			mDrawerList.SetAdapter (new MenuAdapter(menu_item,this));
+			mDrawerList.SetAdapter (new MenuAdapter(menu_item,this));
+
 ;
 			// enable ActionBar app icon to behave as menu_item toggle nav drawer
 			this.ActionBar.SetDisplayHomeAsUpEnabled (true);
@@ -193,11 +194,12 @@ namespace NavigationDrawer
 		private void selectItem (int position)
 		{
 
-
+            // Load Mock Data
 			allpeople = LoadPeopleData("ALL");
 			peopelpartial = LoadPeopleData("PARTIAL");
 			allclient = LoadClientData("ALL");
 			clientpartial =LoadClientData("PARTIAL");
+
 			List<post> data;
 
 			if (position == 0) {
@@ -352,7 +354,7 @@ namespace NavigationDrawer
 				// Two cases, either all will be let through, or only those that are your client (FULL/PARTIAL)
 				if (arg.Equals("ALL") || j["your_people"])
 				{
-                    people_list.Add(new employee(j["id"], null, j["name"], j["avail"], "Java, C#, SQL, Linux"));
+                    people_list.Add(new employee(j["id"], null, j["name"], j["avail"], j["technology"]));
 				}
 			}
 

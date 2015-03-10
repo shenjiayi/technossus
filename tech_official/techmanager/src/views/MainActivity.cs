@@ -49,7 +49,7 @@ namespace NavigationDrawer
 		{
 			bool invalidRequest = true;
             var jl = new JsonLoader();
-            JsonValue data = jl.LoadData(this, "login2.json");
+            JsonValue data = jl.LoadData(this, "login.json");
             var list = (JsonArray) data["valid_users"];
 
             foreach (JsonObject j in list)
