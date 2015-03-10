@@ -46,7 +46,7 @@ namespace NavigationDrawer
 		public override void OnListItemClick (ListView l, View v, int position, long id)
 		{
 			base.OnListItemClick (l, v, position, id);
-			Fragment fragment = new PeopleDetailFragment(allemployee[position].name,allemployee[position].available,allemployee[position].technology);
+            Fragment fragment = new PeopleDetailFragment(PeopleAdapter.GetEmployeeFromPos(position));
 			Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction ();
 			transaction.Replace (Resource.Id.content_frame, fragment);
 			transaction.AddToBackStack (null);

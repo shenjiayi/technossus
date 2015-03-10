@@ -19,8 +19,8 @@ namespace NavigationDrawer
 	public class PeopleAdapter:BaseAdapter<employee>,IFilterable
 	{
 		private List<employee> _allemployee;
-		private Activity _activity; 
-		private List<employee> _partial;
+        private List<employee> _partial;
+        private Activity _activity; 
 
 
 
@@ -31,14 +31,17 @@ namespace NavigationDrawer
 
 			Filter = new PeopleFilter(this);
 		}
-
-
-
+            
 		public override int Count {
 			get {
 				return _allemployee.Count;
 			}
 		}
+
+        public employee GetEmployeeFromPos(int position)
+        {
+            return _allemployee[position];
+        }
 
 		public override Java.Lang.Object GetItem (int position)
 		{
@@ -47,11 +50,8 @@ namespace NavigationDrawer
 
 		public override long GetItemId (int position)
 		{
-			return _allemployee [position].id;
-			//			return position;
+			return position;
 		}
-
-
 
 		public override View GetView (int position, View convertView, ViewGroup parent)
 		{
@@ -89,6 +89,10 @@ namespace NavigationDrawer
 
 		public Filter Filter { get; private set; }
 
+        public override void NotifyDataSetChanged()
+        {
+            base.NotifyDataSetChanged();
+        }
 
 		private class PeopleFilter : Filter
 		{

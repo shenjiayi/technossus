@@ -20,15 +20,11 @@ namespace NavigationDrawer
 {
 	public class PeopleDetailFragment : Fragment
 	{
-		string _name;
-		DateTime _available;
-		string _technology;
+        private readonly employee e;
 
-		public PeopleDetailFragment(string name, DateTime available, string technology)
+		public PeopleDetailFragment(employee e)
 		{
-			_name = name;
-			_available = available;
-			_technology = technology;
+            this.e = e;
 		}
 
 
@@ -40,9 +36,9 @@ namespace NavigationDrawer
 			TextView Technology = rootView.FindViewById<TextView> (Resource.Id.Technology);
 			TextView Available = rootView.FindViewById<TextView> (Resource.Id.Available);
 
-			PeopleName.Text = "Name: "+ _name;
-			Technology.Text = "Technology: " + _technology;
-            Available.Text = "Available Date: " + _available.Date.ToString("d");
+			PeopleName.Text = "Name: "+ e.name;
+			Technology.Text = "Technology: " + e.technology;
+            Available.Text = "Available Date: " + e.available.Date.ToString("d");
 
 			return rootView;
 		}
