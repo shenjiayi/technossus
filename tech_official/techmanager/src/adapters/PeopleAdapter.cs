@@ -18,29 +18,29 @@ namespace NavigationDrawer
 {
 	public class PeopleAdapter:BaseAdapter<employee>,IFilterable
 	{
-		private List<employee> _allemployee;
-        private List<employee> _partial;
-        private Activity _activity; 
-
+		private List<employee> allemployee;
+		private List<employee> partial;
+		private Activity activity; 
 
 
 		public PeopleAdapter(Activity a, IEnumerable<employee> data)
 		{
-			_allemployee = data.OrderBy(s => s.name).ToList();
-			_activity = a;
+			allemployee = data.OrderBy(s => s.name).ToList();
+			partial = null;
+			activity = a;
 
 			Filter = new PeopleFilter(this);
 		}
             
 		public override int Count {
 			get {
-				return _allemployee.Count;
+				return allemployee.Count;
 			}
 		}
 
         public employee GetEmployeeFromPos(int position)
         {
-            return _allemployee[position];
+            return allemployee[position];
         }
 
 		public override Java.Lang.Object GetItem (int position)
@@ -56,76 +56,70 @@ namespace NavigationDrawer
 		public override View GetView (int position, View convertView, ViewGroup parent)
 		{
 
-			var view = convertView ?? _activity.LayoutInflater.Inflate (Resource.Layout.EmployeeLayout, parent, false);
+			var view = convertView ?? activity.LayoutInflater.Inflate (Resource.Layout.EmployeeLayout, parent, false);
 			var contactName = view.FindViewById<TextView> (Resource.Id.name);
 			var contactAvailable = view.FindViewById<TextView> (Resource.Id.available);
 			var contactImage = view.FindViewById<ImageView> (Resource.Id.picture);
 
-			contactName.Text = _allemployee [position].name;
-            contactAvailable.Text = "Available: "+_allemployee [position].available.Date.ToString("d");
+			contactName.Text = allemployee [position].name;
+            contactAvailable.Text = "Available: "+allemployee [position].available.Date.ToString("d");
 
-			if (_allemployee [position].photo == null) {
-
+			if (allemployee [position].photo == null) 
+			{
 				contactImage = view.FindViewById<ImageView> (Resource.Id.picture);
 				contactImage.SetImageResource (Resource.Drawable.contactImage);
 
-			} else {
-
-				//not sure about this part
-
-				var contactUri = ContentUris.WithAppendedId (ContactsContract.Contacts.ContentUri, _allemployee [position].id);
+			} 
+			else 
+			{
+				var contactUri = ContentUris.WithAppendedId (ContactsContract.Contacts.ContentUri, allemployee [position].id);
 				var contactPhotoUri = Android.Net.Uri.WithAppendedPath (contactUri, Contacts.Photos.ContentDirectory);
 
 				contactImage.SetImageURI (contactPhotoUri);
 			}
+
 			return view;
 		}
 
 
 		public override employee this[int position]
 		{
-			get { return _allemployee[position]; }
+			get { return allemployee[position]; }
 		}
 
 		public Filter Filter { get; private set; }
 
-        public override void NotifyDataSetChanged()
-        {
-            base.NotifyDataSetChanged();
-        }
-
 		private class PeopleFilter : Filter
 		{
-			private readonly PeopleAdapter _adapter;
+			private readonly PeopleAdapter adapter;
+
 			public PeopleFilter(PeopleAdapter adapter)
 			{
-				_adapter = adapter;
+				this.adapter = adapter;
 			}
 
 			protected override FilterResults PerformFiltering(ICharSequence constraint)
 			{
 				var returnObj = new FilterResults();
 				var results = new List<employee>();
-				if (_adapter._partial == null)
-					_adapter._partial = _adapter._allemployee;
+				if (adapter.partial == null)
+					adapter.partial = adapter.allemployee;
 
 				if (constraint == null) return returnObj;
 
-				if (_adapter._partial != null && _adapter._partial.Any())
+				if (adapter.partial != null && adapter.partial.Any())
 				{
                     string lowerQuery = constraint.ToString().ToLower();
 
 					// Compare constraint to all fields of Employee
 					results.AddRange(
-						_adapter._partial.Where(
+						adapter.partial.Where(
                             employee => QueryEmployee(employee, lowerQuery)
                         ));
 				}
-
-				// Nasty piece of .NET to Java wrapping, be careful with this!
+					
 				returnObj.Values = FromArray(results.Select(r => r.ToJavaObject()).ToArray());
 				returnObj.Count = results.Count;
-
 				constraint.Dispose();
 
 				return returnObj;
@@ -134,13 +128,10 @@ namespace NavigationDrawer
 			protected override void PublishResults(ICharSequence constraint, FilterResults results)
 			{
 				using (var values = results.Values)				
-					_adapter._allemployee = values.ToArray<Object>()
+					adapter.allemployee = values.ToArray<Object>()
 						.Select(r => r.ToNetObject<employee>()).ToList();
-
-
-				_adapter.NotifyDataSetChanged();
-
-				// Don't do this and see GREF counts rising
+						
+				adapter.NotifyDataSetChanged();
 				constraint.Dispose();
 				results.Dispose();
 			}

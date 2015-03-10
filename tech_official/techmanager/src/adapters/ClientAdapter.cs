@@ -17,7 +17,6 @@ namespace NavigationDrawer
 		private Activity activity;
 
 
-
 		public ClientAdapter(Activity a,IEnumerable<client> clients)
 		{
 			allclient = clients.OrderBy(s => s.name).ToList();
@@ -27,12 +26,16 @@ namespace NavigationDrawer
 			Filter = new ClientFilter(this);
 		}
 
-
 		public override int Count {
 			get 
 			{
 				return allclient.Count;
 			}
+		}
+
+		public client getClientFromPos(int position)
+		{
+			return allclient[position];
 		}
 
 		public override Java.Lang.Object GetItem (int position)
