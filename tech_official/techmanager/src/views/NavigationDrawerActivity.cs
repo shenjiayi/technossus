@@ -45,9 +45,9 @@ namespace NavigationDrawer
 		List<client> clientpartial;
 
 
-		string [] menu_item = {"Dashboard", "Mobile App","Database Design","Web Design","People", "Clients", "Projects","Log out"};
 
-		//project 1 data
+
+		//project data
 		static List <employee> teamMember1 = new List<employee> () {
 			new employee (0, null, "Anteater", "2015/2/20","c++"),
 			new employee (0, null, "James", "2015/1/20","Java"),
@@ -105,8 +105,18 @@ namespace NavigationDrawer
 			mDrawerList.SetLayoutManager (new LinearLayoutManager (this));
 
 			// set up the drawer's list view with items and click listener
-			mDrawerList.SetAdapter (new MenuAdapter (menu_item, this));
-			// enable ActionBar app icon to behave as action to toggle nav drawer
+			string[] menu_item = new string[allproject.Count+5];
+			menu_item[0] = "Dashboard";
+			for (int i = 0; i < allproject.Count; ++i) {
+				menu_item [i + 1] = allproject [i].name;}
+			menu_item[allproject.Count+1] = "People";
+			menu_item[allproject.Count+2] = "Clients";
+			menu_item[allproject.Count+3] = "Projects";
+			menu_item[allproject.Count+4] = "Log out";
+
+			mDrawerList.SetAdapter (new MenuAdapter(menu_item,this));
+;
+			// enable ActionBar app icon to behave as menu_item toggle nav drawer
 			this.ActionBar.SetDisplayHomeAsUpEnabled (true);
 			this.ActionBar.SetHomeButtonEnabled (true);
 
@@ -182,95 +192,65 @@ namespace NavigationDrawer
 
 		private void selectItem (int position)
 		{
+
+
 			allpeople = LoadPeopleData("ALL");
 			peopelpartial = LoadPeopleData("PARTIAL");
 			allclient = LoadClientData("ALL");
 			clientpartial =LoadClientData("PARTIAL");
 			List<post> data;
 
-			switch (position) {
-			case 0: // main dashboard
+			if (position == 0) {
 				ActionBar.RemoveAllTabs ();
 				ActionBar.NavigationMode = ActionBarNavigationMode.Standard;
 				var fragmentManger = this.FragmentManager;
 				var ft = fragmentManger.BeginTransaction ();
-				ft.Replace (Resource.Id.content_frame, new PostFragment(allpost));
+				ft.Replace (Resource.Id.content_frame, new PostFragment (allpost));
 				ft.Commit ();
 
-				Title = menu_item [position];
+				Title = "Dashboard";
 				mDrawerLayout.CloseDrawer (mDrawerList);
-				break;
-			case 1: // Project 1
+			} 
+
+			else if (position > 0 && position < allproject.Count + 1) {
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				data = filterpost (menu_item [position], allpost);
-				addTab ("Info", new ProjectInfoFragment (allproject[0]));
+				data = filterpost (allproject [position - 1].name, allpost);
+				addTab ("Info", new ProjectInfoFragment (allproject [position - 1]));
 				addTab ("Dashboard", new PostFragment (data));
-				addTab ("Teammate", new PeopleFragment (allproject[0].teamMember));
-				Title = menu_item [position];
+				addTab ("Teammate", new PeopleFragment (allproject [position - 1].teamMember));
+				Title = allproject [position - 1].name;
 				mDrawerLayout.CloseDrawer (mDrawerList);
-				break;
-			case 2: // Project 2
-				ActionBar.RemoveAllTabs ();
-				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				data = filterpost (menu_item [position], allpost);
-				addTab ("Info", new ProjectInfoFragment (allproject[1]));
-				addTab ("Dashboard", new PostFragment (data));
-				addTab ("Teammate", new PeopleFragment (allproject[1].teamMember));
-				Title = menu_item [position];
-				mDrawerLayout.CloseDrawer (mDrawerList);
-				break;
-
-
-			case 3: // Project 3
-				ActionBar.RemoveAllTabs ();
-				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				data = filterpost (menu_item [position], allpost);
-				addTab ("Info", new ProjectInfoFragment (allproject[2]));
-				addTab ("Dashboard", new PostFragment (data));
-				addTab ("Teammate", new PeopleFragment (allproject[2].teamMember));
-				Title = menu_item [position];
-				mDrawerLayout.CloseDrawer (mDrawerList);
-				break;
-
-
-			case 4: // People Screen
-				ActionBar.RemoveAllTabs ();
-				ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				addTab ("All people", new PeopleFragment (allpeople));
-				addTab ("Teammates", new PeopleFragment (peopelpartial));
-
-				// update selected item title, then close the drawer
-				Title = menu_item [position];
-				mDrawerLayout.CloseDrawer (mDrawerList);
-				break;
-
-			case 5: // Client Screen
-				ActionBar.RemoveAllTabs ();
-				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				addTab ("All Clients", new ClientFragment (allclient));
-				addTab ("Your Clients", new ClientFragment (clientpartial));
-
-				// update selected item title, then close the drawer
-				Title = menu_item [position];
-				mDrawerLayout.CloseDrawer (mDrawerList);
-				break;
-
-			case 6: // Project Screen
-				ActionBar.RemoveAllTabs ();
-				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				addTab ("All Clients", new ProjectFragment (allproject,allpost));
-				addTab ("Your Clients", new ProjectFragment (allproject,allpost));
-
-				// update selected item title, then close the drawer
-				Title = menu_item [position];
-				mDrawerLayout.CloseDrawer (mDrawerList);
-				break;
-
-			case 7: //logout 
-				base.OnBackPressed ();
-				break;
 			}
+
+			else if (position == allproject.Count + 1) {
+					ActionBar.RemoveAllTabs ();
+					ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
+					addTab ("All people", new PeopleFragment (allpeople));
+					addTab ("Teammates", new PeopleFragment (peopelpartial));
+					Title = "People";
+					mDrawerLayout.CloseDrawer (mDrawerList);
+				}
+			else if (position == allproject.Count + 2) {
+					ActionBar.RemoveAllTabs ();
+					this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
+					addTab ("All Clients", new ClientFragment (allclient));
+					addTab ("Your Clients", new ClientFragment (clientpartial));
+					Title = "Clients";
+					mDrawerLayout.CloseDrawer (mDrawerList);
+				}
+			else if (position == allproject.Count + 3) {
+					ActionBar.RemoveAllTabs ();
+					this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
+					addTab ("All Project", new ProjectFragment (allproject,allpost));
+					addTab ("Your Project", new ProjectFragment (allproject,allpost));
+					Title = "Projects";
+					mDrawerLayout.CloseDrawer (mDrawerList);
+				}
+			else if (position == allproject.Count + 4) {
+					base.OnBackPressed ();
+				}
+
 		}
 
 		protected override void OnSaveInstanceState (Bundle outState)

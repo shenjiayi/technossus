@@ -78,7 +78,6 @@ namespace NavigationDrawer
 
 
 			base.OnListItemClick (l, v, position, id);
-
 			List<post> data;
 			Activity.ActionBar.RemoveAllTabs ();
 			Activity.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
