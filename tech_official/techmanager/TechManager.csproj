@@ -130,10 +130,6 @@
     <AndroidResource Include="Resources\drawable\TechEmblem.png" />
     <AndroidResource Include="Resources\drawable\ic_launcher2.png" />
     <AndroidResource Include="Resources\drawable\ic_launcher.png" />
-    <AndroidResource Include="Resources\drawable\people1.png" />
-    <AndroidResource Include="Resources\drawable\people2.png" />
-    <AndroidResource Include="Resources\drawable\people3.png" />
-    <AndroidResource Include="Resources\drawable\people4.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\clients.json" />
