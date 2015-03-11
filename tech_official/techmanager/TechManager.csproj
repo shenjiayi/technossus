@@ -118,27 +118,35 @@
     <AndroidResource Include="Resources\drawable\drawer_shadow.9.png" />
     <AndroidResource Include="Resources\drawable\ic_drawer.png" />
     <AndroidResource Include="Resources\drawable\tile.9.png" />
-    <AndroidResource Include="Resources\drawable\logo.png" />
     <AndroidResource Include="Resources\drawable\contactImage.png" />
-    <AndroidResource Include="Resources\drawable\sample_dashboard_item_background.9.png" />
-    <AndroidResource Include="Resources\layout\client.axml">
+    <AndroidResource Include="Resources\layout\client.axml" />
+    <AndroidResource Include="Resources\layout\project.axml" />
+    <AndroidResource Include="Resources\layout\post.axml" />
+    <AndroidResource Include="Resources\layout\ProjectInfo.axml">
       <DependentUpon>project.axml</DependentUpon>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\fragment_planet.xml" />
-    <AndroidResource Include="Resources\layout\project.axml" />
-    <AndroidResource Include="Resources\drawable\ic_launcher_tcube.png" />
-    <AndroidResource Include="Resources\drawable\Background.png" />
-    <AndroidResource Include="Resources\layout\post.axml" />
-    <AndroidResource Include="Resources\layout\ProjectInfo.axml" />
-    <AndroidResource Include="Resources\layout\EmployeeLayout.axml" />
-    <AndroidResource Include="Resources\layout\PostLayout.axml" />
-    <AndroidResource Include="Resources\layout\ProjectLayout.axml" />
-    <AndroidResource Include="Resources\layout\ClientLayout.axml" />
-    <AndroidResource Include="Resources\layout\ClientDetail.axml" />
-    <AndroidResource Include="Resources\layout\PeopleDetail.axml" />
+    <AndroidResource Include="Resources\layout\PostLayout.axml">
+      <DependentUpon>post.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ProjectLayout.axml">
+      <DependentUpon>project.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ClientLayout.axml">
+      <DependentUpon>client.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ClientDetail.axml">
+      <DependentUpon>client.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PeopleDetail.axml">
+      <DependentUpon>people.axml</DependentUpon>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable\TechEmblem.png" />
-    <AndroidResource Include="Resources\drawable\ic_launcher2.png" />
     <AndroidResource Include="Resources\drawable\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable\sample_dashboard_item_background.9.png" />
+    <AndroidResource Include="Resources\layout\PeopleLayout.axml">
+      <DependentUpon>people.axml</DependentUpon>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\clients.json" />

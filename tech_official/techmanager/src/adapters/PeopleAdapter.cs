@@ -50,7 +50,7 @@ namespace NavigationDrawer
 		public override View GetView (int position, View convertView, ViewGroup parent)
 		{
 
-			var view = convertView ?? activity.LayoutInflater.Inflate (Resource.Layout.EmployeeLayout, parent, false);
+			var view = convertView ?? activity.LayoutInflater.Inflate (Resource.Layout.PeopleLayout, parent, false);
 			var contactName = view.FindViewById<TextView> (Resource.Id.name);
 			var contactAvailable = view.FindViewById<TextView> (Resource.Id.available);
 			var contactImage = view.FindViewById<ImageView> (Resource.Id.picture);
