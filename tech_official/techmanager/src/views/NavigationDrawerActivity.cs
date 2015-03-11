@@ -375,7 +375,7 @@ namespace NavigationDrawer
 					technologies.Add(technology);
 				}
 
-				projects.Add(new project(j["id"], j["projectname"], j["comp"], j["start"], j["end"], teamMembers.OrderBy(x => x.name).ToList(), technologies.OrderBy(x => x).ToList(), ""));
+				projects.Add(new project(j["id"], j["projectname"], j["comp"], j["start"], j["end"], teamMembers.OrderBy(x => x.name).ToList(), technologies.OrderBy(x => x).ToList(), j["description"]));
 			}
 
 			List<project> ordered_proj_list = projects.OrderBy(x => x.name).ToList();
