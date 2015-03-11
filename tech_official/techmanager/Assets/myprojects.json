@@ -9,10 +9,10 @@
 				{"id" : 0, "photo" : null, "content" : "Added Ada to the project", "name" : "Peter Anteater", "projectname" : "Database Design", "companyname" : "Microsoft", "date" : "2014/2/12"}],
 
 	"myprojectsside":[
-				{"id" : 0, "projectname" : "Database Design", "comp" : "Apple", "start" : "2014/03/27", "end" : "2014/09/23"},
-				{"id" : 0, "projectname" : "Mobile App", "comp" : "Dell", "start" : "2015/02/24", "end" : "2015/05/23"},
-				{"id" : 0, "projectname" : "Web Design", "comp" : "SpaceX","start" : "2014/02/24", "end" : "2015/07/23"},
-				{"id" : 0, "projectname" : "AI Project", "comp" : "SpaceX","start" : "2014/02/24", "end" : "2015/07/23"}]
+				{"id" : 0, "projectname" : "Database Design", "comp" : "Apple", "start" : "2014/03/27", "end" : "2014/09/23", "team_member" : ["Anteater", "James"], "technology" : ["SQL", ".NET", "html"] },
+				{"id" : 0, "projectname" : "Mobile App", "comp" : "Dell", "start" : "2015/02/24", "end" : "2015/05/23", "team_member" : ["Anteater", "Carrie"], "technology" : ["Java", "C#", "html"] },
+				{"id" : 0, "projectname" : "Web Design", "comp" : "SpaceX","start" : "2014/02/24", "end" : "2015/07/23", "team_member" : ["Ryan", "James"], "technology" : ["C++", "C#", "CSS", "html"] },
+				{"id" : 0, "projectname" : "AI Project", "comp" : "SpaceX","start" : "2014/02/24", "end" : "2015/07/23", "team_member" : ["Anteater", "Jay"], "technology" : ["Java", "Linux", "html"] }]
 }
 
 

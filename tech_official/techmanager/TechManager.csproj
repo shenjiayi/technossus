@@ -68,7 +68,6 @@
     <Compile Include="src\views\NavigationDrawerActivity.cs" />
     <Compile Include="src\views\MainActivity.cs" />
     <Compile Include="src\objects\employee.cs" />
-    <Compile Include="src\test.cs" />
     <Compile Include="src\fragments\ClientFragment.cs">
     </Compile>
     <Compile Include="src\fragments\PeopleFragment.cs" />

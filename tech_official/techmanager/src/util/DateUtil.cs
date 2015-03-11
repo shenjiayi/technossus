@@ -23,7 +23,6 @@ namespace NavigationDrawer
             if (match.Success)
             {
                 // Can easily rearrange the way we interpret or parse the date, just change the assignments
-                //string[] dateArray = s.Split('/');
                 string year = match.Groups["year"].Value;
                 string month = match.Groups["month"].Value;
                 string day = match.Groups["day"].Value;

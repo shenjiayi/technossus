@@ -26,47 +26,11 @@ namespace NavigationDrawer
 		//data here 
 		//make sure they are in alphebetical order for now
 		List<employee> allpeople;
-		List<employee> peopelpartial;
+		List<employee> peoplepartial;
 		List<client> allclient;
 		List<client> clientpartial;
-
-
-		//project data
-		static List <employee> teamMember1 = new List<employee> () {
-			new employee (0, null, "Anteater", "2015/2/20","c++"),
-			new employee (0, null, "James", "2015/1/20","Java"),
-		};
-		static List <employee> teamMember2 = new List<employee> () {
-			new employee (0, null, "Anteater","2015/2/20","c++"),
-			new employee (0, null, "Carrie", "2015/5/20","Java"),
-		};
-		static List <employee> teamMember3 = new List<employee> () {
-			new employee (0, null, "Anteater", "2015/2/20","c++"),
-			new employee (0, null, "James", "2015/1/20","Java"),
-		};
-
-		static List <string> technology1 = new List<string> { "SQL", ".NET", "html" };
-		static List <string> technology2 = new List<string> { "java", "c#", "html" };
-		static List <string> technology3 = new List<string> { "C++", "c#", "css", "Linux" };
-
-
-		List <project> allproject = new List<project> () {
-
-			new project (0, "Database Design", "Apple", "2014/03/27", "2014/09/23", teamMember1, technology1,""),
-			new project (0, "Mobile App", "Dell", "2015/02/24", "2015/05/23", teamMember2, technology2,""),
-			new project (0, "Web Design", "SpaceX","2014/02/24", "2015/07/23", teamMember3, technology3,"Design a website")
-		};
-			
-		List<post> allpost = new List<post> () {
-			new post (0, null,"Added Carrie to the project", "Peter Anteater", "Web Design", "SpaceX", "2014/2/12"),
-			new post (0, null,"Added James to the project", "Peter Anteater", "Mobile App", "Dell", "2014/2/12"),
-			new post (0, null,"Looking forward to working on the project", "Jone Smith", "Web Design", "SpaceX", "2014/2/14"),
-			new post (0, null,"Meeing at 9:30", "Peter Anteater", "Mobile App", "Dell", "2014/2/15"),
-			new post (0, null,"Added Ada the project", "Peter Anteater", "Database Design", "SpaceX", "2014/3/27"),
-			new post (0, null,"Meeting tommorow", "Peter Anteater", "Web Design", "SpaceX", "2014/3/12"),
-			new post (0, null,"Just commit my changes", "Kate Chen", "Web Design", "SpaceX", "2014/5/12")
-		};
-
+		List<post> allpost;
+		List<project> allproject;
 
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
@@ -85,7 +49,7 @@ namespace NavigationDrawer
 			mDrawerList.SetLayoutManager (new LinearLayoutManager (this));
 
 			// set up the drawer's list view with items and click listener
-			allproject = LoadSideBarProjectData ();
+			allproject = LoadProjectData ();
 			string[] menu_item = new string[allproject.Count+5];
 			menu_item[0] = "Dashboard";
 			for (int i = 0; i < allproject.Count; ++i) {
@@ -175,16 +139,15 @@ namespace NavigationDrawer
 
 		private void selectItem (int position)
 		{
-            // Load Mock Data
-			allpeople = LoadPeopleData("ALL");
-			peopelpartial = LoadPeopleData("PARTIAL");
-			allclient = LoadClientData("ALL");
-			clientpartial =LoadClientData("PARTIAL");
-
 			List<post> data;
 
+			// Dash Board
 			if (position == 0) 
 			{
+				// Load Data
+				allpost = LoadDashProjectData();
+
+				// Update User Interface
 				ActionBar.RemoveAllTabs ();
 				ActionBar.NavigationMode = ActionBarNavigationMode.Standard;
 				var fragmentManger = this.FragmentManager;
@@ -195,44 +158,68 @@ namespace NavigationDrawer
 				Title = "Dashboard";
 				mDrawerLayout.CloseDrawer (mDrawerList);
 			} 
+			// Project Pages
 			else if (position > 0 && position < allproject.Count + 1) 
 			{
+				// Load Data
+				//allproject;
+
+				//Update User Interface
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				data = filterpost (allproject [position - 1].name, LoadDashProjectData());
+				data = filterpost (allproject [position - 1].name, allpost);
 				addTab ("Info", new ProjectInfoFragment (allproject [position - 1]));
 				addTab ("Dashboard", new PostFragment (data));
 				addTab ("Teammate", new PeopleFragment (allproject [position - 1].teamMember));
 				Title = allproject [position - 1].name;
 				mDrawerLayout.CloseDrawer (mDrawerList);
 			}
+			// People Screen
 			else if (position == allproject.Count + 1)
 			{
-					ActionBar.RemoveAllTabs ();
-					ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-					addTab ("All people", new PeopleFragment (allpeople));
-					addTab ("Teammates", new PeopleFragment (peopelpartial));
-					Title = "People";
-					mDrawerLayout.CloseDrawer (mDrawerList);
+				// Load Data
+				allpeople = LoadPeopleData("ALL");
+				peoplepartial = LoadPeopleData("PARTIAL");
+
+				// Update User Interface
+				ActionBar.RemoveAllTabs ();
+				ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
+				addTab ("All people", new PeopleFragment (allpeople));
+				addTab ("Your Teammates", new PeopleFragment (peoplepartial));
+				Title = "People";
+				mDrawerLayout.CloseDrawer (mDrawerList);
 			}
+			// Client Screen
 			else if (position == allproject.Count + 2) 
 			{
-					ActionBar.RemoveAllTabs ();
-					this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-					addTab ("All Clients", new ClientFragment (allclient));
-					addTab ("Your Clients", new ClientFragment (clientpartial));
-					Title = "Clients";
-					mDrawerLayout.CloseDrawer (mDrawerList);
+				// Load Data
+				allclient = LoadClientData("ALL");
+				clientpartial = LoadClientData("PARTIAL");
+
+				// Update User Interface
+				ActionBar.RemoveAllTabs ();
+				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
+				addTab ("All Clients", new ClientFragment (allclient));
+				addTab ("Your Clients", new ClientFragment (clientpartial));
+				Title = "Clients";
+				mDrawerLayout.CloseDrawer (mDrawerList);
 			}
+			// Project Screen
 			else if (position == allproject.Count + 3) 
 			{
-					ActionBar.RemoveAllTabs ();
-					this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-					addTab ("All Project", new ProjectFragment (allproject,allpost));
-					addTab ("Your Project", new ProjectFragment (allproject,allpost));
-					Title = "Projects";
-					mDrawerLayout.CloseDrawer (mDrawerList);
+				// Load Data
+				//allproject;
+				allpost = LoadDashProjectData();
+
+				// Update User Interface
+				ActionBar.RemoveAllTabs ();
+				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
+				addTab ("All Project", new ProjectFragment (allproject,allpost));
+				addTab ("Your Project", new ProjectFragment (allproject,allpost));
+				Title = "Projects";
+				mDrawerLayout.CloseDrawer (mDrawerList);
 			}
+			// Logout
 			else if (position == allproject.Count + 4) 
 			{
 				StartActivity (typeof(MainActivity));
@@ -366,7 +353,7 @@ namespace NavigationDrawer
 		}
 
 
-		private List<project> LoadSideBarProjectData()
+		private List<project> LoadProjectData()
 		{
 
 			List<project> projects = new List<project>();
@@ -376,12 +363,38 @@ namespace NavigationDrawer
 
 			foreach (JsonObject j in list)
 			{
-				projects.Add(new project(j["id"], j["projectname"], j["comp"], j["start"], j["end"], teamMember1, technology1, ""));
+				var teamMembers = new List<employee>();
+				foreach (JsonValue member in j["team_member"])
+				{
+					teamMembers.Add(FindEmployee(member));
+				}
+
+				var technologies = new List<string>();
+				foreach (JsonValue technology in j["technology"])
+				{
+					technologies.Add(technology);
+				}
+
+				projects.Add(new project(j["id"], j["projectname"], j["comp"], j["start"], j["end"], teamMembers.OrderBy(x => x.name).ToList(), technologies.OrderBy(x => x).ToList(), ""));
 			}
 
 			List<project> ordered_proj_list = projects.OrderBy(x => x.name).ToList();
 
 			return ordered_proj_list;
+		}
+
+		private employee FindEmployee(string name)
+		{
+			List<employee> employeeList = LoadPeopleData("ALL");
+			foreach (employee e in employeeList)
+			{
+				if (e.name.Equals(name))
+				{
+					return e;
+				}
+			}
+
+			return null;
 		}
 	}
 
