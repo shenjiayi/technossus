@@ -1,6 +1,6 @@
 ﻿namespace NavigationDrawer
 {
-	public class post
+	public class Post
 	{
 		public long id{ get; set; }
 		public string content{ get; set; }
@@ -11,7 +11,7 @@
 		public string photo{ get; set; }
 
 
-		public post (long id, string photo, string content, string name, string project, string client, string date)
+		public Post (long id, string photo, string content, string name, string project, string client, string date)
 		{
 			this.id = id;
 			this.content = content;
@@ -22,7 +22,7 @@
 			this.date = date;
 		}
 
-		public post(post prev)
+		public Post(Post prev)
 		{
 			id = prev.id;
 			photo = prev.photo;

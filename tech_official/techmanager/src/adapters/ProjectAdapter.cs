@@ -9,13 +9,13 @@ using Object = Java.Lang.Object;
 
 namespace NavigationDrawer
 {
-	public class ProjectAdapter:BaseAdapter<project>,IFilterable
+	public class ProjectAdapter:BaseAdapter<Project>,IFilterable
 	{
-		List<project> allproject;
-		List<project> partial;
+		List<Project> allproject;
+		List<Project> partial;
 		Activity activity;
 
-		public ProjectAdapter(Activity a,IEnumerable<project> project)
+		public ProjectAdapter(Activity a,IEnumerable<Project> project)
 		{
 			allproject = project.OrderBy(s => s.name).ToList();
 			partial = null;
@@ -53,7 +53,7 @@ namespace NavigationDrawer
 
 		}
 			
-		public override project this[int position]
+		public override Project this[int position]
 		{
 			get { return allproject[position]; }
 		}
@@ -74,7 +74,7 @@ namespace NavigationDrawer
 			protected override FilterResults PerformFiltering(ICharSequence constraint)
 			{
 				var returnObj = new FilterResults();
-				var results = new List<project>();
+				var results = new List<Project>();
 
 				if (adapter.partial == null)
 					adapter.partial = adapter.allproject;
@@ -102,7 +102,7 @@ namespace NavigationDrawer
 			{
 				using (var values = results.Values)				
 					adapter.allproject = values.ToArray<Object>()
-						.Select(r => r.ToNetObject<project>()).ToList();
+						.Select(r => r.ToNetObject<Project>()).ToList();
 						
 				adapter.NotifyDataSetChanged();
 				constraint.Dispose();
@@ -110,7 +110,7 @@ namespace NavigationDrawer
 			}
 
             // Overall Query Method that takes in string, tokenizes it, and searches for projects that satisfy all terms
-            private bool QueryProject(project p, string query)
+            private bool QueryProject(Project p, string query)
             {
                 string[] tokens = query.Trim().Split(' ');
                 foreach (string q in tokens)
@@ -125,7 +125,7 @@ namespace NavigationDrawer
             }
 
             // Query individual term in project
-            private bool QueryTokenProject(project p, string query)
+            private bool QueryTokenProject(Project p, string query)
             {
 				if ((p.name != null && p.name.ToLower().Contains(query))
 					|| (p.client != null && p.client.ToLower().Contains(query)) 
@@ -134,7 +134,7 @@ namespace NavigationDrawer
                     || DateUtil.isDuringMonth(p.endDate,query))
                     return true;
 
-                foreach (employee e in p.teamMember)
+                foreach (Employee e in p.teamMember)
                     if (e.name.ToLower().Contains(query))
                         return true;
 

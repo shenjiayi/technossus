@@ -12,9 +12,9 @@ namespace NavigationDrawer
 {
 	public class ProjectInfoFragment : Fragment
 	{
-		project projectinfo;
+		Project projectinfo;
 
-		public ProjectInfoFragment(project data){
+		public ProjectInfoFragment(Project data){
 			projectinfo = data;
 		}
 
@@ -40,7 +40,7 @@ namespace NavigationDrawer
     		return rootView;
     	}
 
-        private string computeTechnologyString(project p)
+        private string computeTechnologyString(Project p)
         {
             if (p == null)
             {

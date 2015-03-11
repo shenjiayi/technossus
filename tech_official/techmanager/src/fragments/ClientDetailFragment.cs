@@ -10,9 +10,9 @@ namespace NavigationDrawer
 {
 	public class ClientDetailFragment : Fragment
 	{
-        private readonly client c;
+        private readonly Client c;
 
-        public ClientDetailFragment(client c)
+        public ClientDetailFragment(Client c)
 		{
             this.c = c;
 		}

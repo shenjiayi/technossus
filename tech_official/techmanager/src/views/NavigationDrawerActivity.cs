@@ -25,12 +25,12 @@ namespace NavigationDrawer
 		private string mDrawerTitle;
 		//data here 
 		//make sure they are in alphebetical order for now
-		List<employee> allpeople;
-		List<employee> peoplepartial;
-		List<client> allclient;
-		List<client> clientpartial;
-		List<post> allpost;
-		List<project> allproject;
+		List<Employee> allPeople;
+		List<Employee> partialPeople;
+		List<Client> allClient;
+		List<Client> partialClient;
+		List<Post> allPost;
+		List<Project> allProject;
 
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
@@ -49,15 +49,15 @@ namespace NavigationDrawer
 			mDrawerList.SetLayoutManager (new LinearLayoutManager (this));
 
 			// set up the drawer's list view with items and click listener
-			allproject = LoadProjectData ();
-			string[] menu_item = new string[allproject.Count+5];
+			allProject = LoadProjectData ();
+			string[] menu_item = new string[allProject.Count+5];
 			menu_item[0] = "Dashboard";
-			for (int i = 0; i < allproject.Count; ++i) {
-				menu_item [i + 1] = allproject [i].name;}
-			menu_item[allproject.Count+1] = "People";
-			menu_item[allproject.Count+2] = "Clients";
-			menu_item[allproject.Count+3] = "Projects";
-			menu_item[allproject.Count+4] = "Log out";
+			for (int i = 0; i < allProject.Count; ++i) {
+				menu_item [i + 1] = allProject [i].name;}
+			menu_item[allProject.Count+1] = "People";
+			menu_item[allProject.Count+2] = "Clients";
+			menu_item[allProject.Count+3] = "Projects";
+			menu_item[allProject.Count+4] = "Log out";
 
 			mDrawerList.SetAdapter (new MenuAdapter(menu_item,this));
 
@@ -139,88 +139,86 @@ namespace NavigationDrawer
 
 		private void selectItem (int position)
 		{
-			List<post> data;
 
 			// Dash Board
 			if (position == 0) 
 			{
 				// Load Data
-				allpost = LoadDashProjectData();
+				allPost = LoadDashProjectData();
 
 				// Update User Interface
 				ActionBar.RemoveAllTabs ();
 				ActionBar.NavigationMode = ActionBarNavigationMode.Standard;
 				var fragmentManger = this.FragmentManager;
 				var ft = fragmentManger.BeginTransaction ();
-				ft.Replace (Resource.Id.content_frame, new PostFragment (allpost));
+				ft.Replace (Resource.Id.content_frame, new PostFragment (allPost));
 				ft.Commit ();
 
 				Title = "Dashboard";
 				mDrawerLayout.CloseDrawer (mDrawerList);
 			} 
 			// Project Pages
-			else if (position > 0 && position < allproject.Count + 1) 
+			else if (position > 0 && position < allProject.Count + 1) 
 			{
 				// Load Data
-				//allproject;
+				List<Post> data;
 
 				//Update User Interface
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				data = filterpost (allproject [position - 1].name, allpost);
-				addTab ("Info", new ProjectInfoFragment (allproject [position - 1]));
+				data = filterpost (allProject [position - 1].name, allPost);
+				addTab ("Info", new ProjectInfoFragment (allProject [position - 1]));
 				addTab ("Dashboard", new PostFragment (data));
-				addTab ("Teammate", new PeopleFragment (allproject [position - 1].teamMember));
-				Title = allproject [position - 1].name;
+				addTab ("Teammate", new PeopleFragment (allProject [position - 1].teamMember));
+				Title = allProject [position - 1].name;
 				mDrawerLayout.CloseDrawer (mDrawerList);
 			}
 			// People Screen
-			else if (position == allproject.Count + 1)
+			else if (position == allProject.Count + 1)
 			{
 				// Load Data
-				allpeople = LoadPeopleData("ALL");
-				peoplepartial = LoadPeopleData("PARTIAL");
+				allPeople = LoadPeopleData("ALL");
+				partialPeople = LoadPeopleData("PARTIAL");
 
 				// Update User Interface
 				ActionBar.RemoveAllTabs ();
 				ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				addTab ("All people", new PeopleFragment (allpeople));
-				addTab ("Your Teammates", new PeopleFragment (peoplepartial));
+				addTab ("All people", new PeopleFragment (allPeople));
+				addTab ("Your Teammates", new PeopleFragment (partialPeople));
 				Title = "People";
 				mDrawerLayout.CloseDrawer (mDrawerList);
 			}
 			// Client Screen
-			else if (position == allproject.Count + 2) 
+			else if (position == allProject.Count + 2) 
 			{
 				// Load Data
-				allclient = LoadClientData("ALL");
-				clientpartial = LoadClientData("PARTIAL");
+				allClient = LoadClientData("ALL");
+				partialClient = LoadClientData("PARTIAL");
 
 				// Update User Interface
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				addTab ("All Clients", new ClientFragment (allclient));
-				addTab ("Your Clients", new ClientFragment (clientpartial));
+				addTab ("All Clients", new ClientFragment (allClient));
+				addTab ("Your Clients", new ClientFragment (partialClient));
 				Title = "Clients";
 				mDrawerLayout.CloseDrawer (mDrawerList);
 			}
 			// Project Screen
-			else if (position == allproject.Count + 3) 
+			else if (position == allProject.Count + 3) 
 			{
 				// Load Data
-				//allproject;
-				allpost = LoadDashProjectData();
+				allPost = LoadDashProjectData();
 
 				// Update User Interface
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-				addTab ("All Project", new ProjectFragment (allproject,allpost));
-				addTab ("Your Project", new ProjectFragment (allproject,allpost));
+				addTab ("All Project", new ProjectFragment (allProject,allPost));
+				addTab ("Your Project", new ProjectFragment (allProject,allPost));
 				Title = "Projects";
 				mDrawerLayout.CloseDrawer (mDrawerList);
 			}
 			// Logout
-			else if (position == allproject.Count + 4) 
+			else if (position == allProject.Count + 4) 
 			{
 				StartActivity (typeof(MainActivity));
 			}
@@ -282,19 +280,19 @@ namespace NavigationDrawer
 			mDrawerToggle.OnConfigurationChanged (newConfig);
 		}
 
-		public List<post> filterpost (string projectname, List<post> allpost)
+		public List<Post> filterpost (string projectname, List<Post> allpost)
 		{
-			List<post> result = new List<post>{};
-			foreach (post item in allpost){
+			List<Post> result = new List<Post>{};
+			foreach (Post item in allpost){
 				if (item.project == projectname)
 					result.Add (item);
 			}
 			return result;
 		}
 
-        private List<client> LoadClientData(string arg)
+        private List<Client> LoadClientData(string arg)
         {
-            List<client> client_list = new List<client>();
+			List<Client> clientList = new List<Client>();
             var jl = new JsonLoader();
             JsonValue data = jl.LoadData(this, "clients.json");
             var list = (JsonArray) data["client_list"];
@@ -304,66 +302,68 @@ namespace NavigationDrawer
                 // Two cases, either all will be let through, or only those that are your client (FULL/PARTIAL)
                 if (arg.Equals("ALL") || j["your_client"])
                 {
-                    client_list.Add(new client(j["id"], null, j["company"], j["contact_name"], j["contact_email"]));
+                    clientList.Add(new Client(j["id"], null, j["company"], j["contact_name"], j["contact_email"]));
                 }
             }
 
-            List<client> ordered_client_list = client_list.OrderBy(x => x.name).ToList();
+			List<Client> orderedClientList = clientList.OrderBy(x => x.name).ToList();
 
-            return ordered_client_list;
+            return orderedClientList;
         }
 
-		private List<employee> LoadPeopleData(string arg)
+		private List<Employee> LoadPeopleData(string arg)
 		{
-			List<employee> people_list = new List<employee>();
+			List<Employee> peopleList = new List<Employee>();
 			var jl = new JsonLoader();
 			JsonValue data = jl.LoadData(this, "people.json");
 			var list = (JsonArray) data["people_list"];
 
 			foreach (JsonObject j in list)
 			{
-				// Two cases, either all will be let through, or only those that are your client (FULL/PARTIAL)
+				// Two cases, either all will be let through, or only those that are your team member (FULL/PARTIAL)
 				if (arg.Equals("ALL") || j["your_people"])
 				{
-                    people_list.Add(new employee(j["id"], null, j["name"], j["avail"], j["technology"]));
+                    peopleList.Add(new Employee(j["id"], null, j["name"], j["avail"], j["technology"]));
 				}
 			}
 
-            List<employee> ordered_people_list = people_list.OrderBy(x => x.name).ToList();
+			List<Employee> orderedPeopleList = peopleList.OrderBy(x => x.name).ToList();
 
-            return ordered_people_list;
+            return orderedPeopleList;
 		}
 			
 
-		private List<post> LoadDashProjectData()
+		private List<Post> LoadDashProjectData()
 		{
-			List<post> post = new List<post>();
+			List<Post> post = new List<Post>();
 			var jl = new JsonLoader();
 			JsonValue data = jl.LoadData(this, "myprojects.json");
 			var list = (JsonArray) data["myprojectsdash"];
 
 			foreach (JsonObject j in list)
 			{
-				post.Add(new post(j["id"], j["photo"], j["content"], j["name"], j["projectname"], j["companyname"], j["date"]));
+				post.Add(new Post(j["id"], j["photo"], j["content"], j["name"], j["projectname"], j["companyname"], j["date"]));
 			}
 
-			List<post> ordered_post_list = post.OrderBy(x => x.name).ToList();
+			// Should order list by time stamp, but currently it is by name
+			List<Post> orderedPostList = post.OrderBy(x => x.name).ToList();
 
-			return ordered_post_list;
+			return orderedPostList;
 		}
 
-
-		private List<project> LoadProjectData()
+		// Generate Project data
+		private List<Project> LoadProjectData()
 		{
 
-			List<project> projects = new List<project>();
+			List<Project> projects = new List<Project>();
 			var jl = new JsonLoader();
 			JsonValue data = jl.LoadData(this, "myprojects.json");
 			var list = (JsonArray) data["myprojectsside"];
 
 			foreach (JsonObject j in list)
 			{
-				var teamMembers = new List<employee>();
+				// Generate team member list by querying each employee
+				var teamMembers = new List<Employee>();
 				foreach (JsonValue member in j["team_member"])
 				{
 					teamMembers.Add(FindEmployee(member));
@@ -375,18 +375,19 @@ namespace NavigationDrawer
 					technologies.Add(technology);
 				}
 
-				projects.Add(new project(j["id"], j["projectname"], j["comp"], j["start"], j["end"], teamMembers.OrderBy(x => x.name).ToList(), technologies.OrderBy(x => x).ToList(), j["description"]));
+				projects.Add(new Project(j["id"], j["projectname"], j["comp"], j["start"], j["end"], teamMembers.OrderBy(x => x.name).ToList(), technologies.OrderBy(x => x).ToList(), j["description"]));
 			}
 
-			List<project> ordered_proj_list = projects.OrderBy(x => x.name).ToList();
+			List<Project> orderedProjectList = projects.OrderBy(x => x.name).ToList();
 
-			return ordered_proj_list;
+			return orderedProjectList;
 		}
 
-		private employee FindEmployee(string name)
+		// Helper function to load the employee associated with a project
+		private Employee FindEmployee(string name)
 		{
-			List<employee> employeeList = LoadPeopleData("ALL");
-			foreach (employee e in employeeList)
+			List<Employee> employeeList = LoadPeopleData("ALL");
+			foreach (Employee e in employeeList)
 			{
 				if (e.name.Equals(name))
 				{

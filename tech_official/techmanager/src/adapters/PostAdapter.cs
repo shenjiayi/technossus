@@ -9,10 +9,10 @@ namespace NavigationDrawer
 {
 	public class PostAdapter:BaseAdapter
 	{
-		private readonly List<post> allposts;
+		private readonly List<Post> allposts;
 		private readonly Activity activity;
 
-		public PostAdapter(Activity a,List<post> data)
+		public PostAdapter(Activity a,List<Post> data)
 		{
 			activity = a;
 			allposts = data;

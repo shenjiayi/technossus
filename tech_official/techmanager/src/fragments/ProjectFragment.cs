@@ -18,10 +18,10 @@ namespace NavigationDrawer
 		public const string ARG_NUMBER = "id_number";
 		private SearchView _searchView;
 		private ProjectAdapter ProjectAdapter;
-		List<project> allproject;
-		List<post> allpost;
+		List<Project> allproject;
+		List<Post> allpost;
 
-		public ProjectFragment(List<project> data, List<post> data1)
+		public ProjectFragment(List<Project> data, List<Post> data1)
 		{
 			allproject = data;
 			allpost = data1;
@@ -60,7 +60,7 @@ namespace NavigationDrawer
 		public override void OnListItemClick (ListView l, View v, int position, long id)
 		{
 			base.OnListItemClick (l, v, position, id);
-			List<post> data;
+			List<Post> data;
 			Activity.ActionBar.RemoveAllTabs ();
 			Activity.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
 			data = filterpost (allproject[position].name, allpost);
@@ -80,10 +80,10 @@ namespace NavigationDrawer
 			Activity.ActionBar.AddTab (tab);
 		}
 
-		public List<post> filterpost (string projectname, List<post> allpost)
+		public List<Post> filterpost (string projectname, List<Post> allpost)
 		{
-			List<post> result = new List<post>{};
-			foreach (post item in allpost){
+			List<Post> result = new List<Post>{};
+			foreach (Post item in allpost){
 				if (item.project == projectname)
 					result.Add (item);
 			}

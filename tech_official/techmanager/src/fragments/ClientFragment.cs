@@ -22,10 +22,10 @@ namespace NavigationDrawer
 
 		ClientAdapter ClientAdapter;
 
-		List<client> allclient;
+		List<Client> allclient;
 
 
-		public ClientFragment(List<client> data){
+		public ClientFragment(List<Client> data){
 			allclient = data;
 		}
 			

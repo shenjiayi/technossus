@@ -13,9 +13,9 @@ namespace NavigationDrawer
 	public class PostFragment : Fragment
 	{
 		public const string ARG_NUMBER = "id_number";
-		List<post> allpost;
+		List<Post> allpost;
 
-		public PostFragment(List<post> data){
+		public PostFragment(List<Post> data){
 			allpost = data;
 		}
 

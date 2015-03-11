@@ -10,13 +10,13 @@ using Object = Java.Lang.Object;
 
 namespace NavigationDrawer
 {
-	public class ClientAdapter:BaseAdapter<client>,IFilterable
+	public class ClientAdapter:BaseAdapter<Client>,IFilterable
 	{
-		private List<client> allclient;
-		private List<client> partial;
+		private List<Client> allclient;
+		private List<Client> partial;
 		private Activity activity;
 
-		public ClientAdapter(Activity a,IEnumerable<client> clients)
+		public ClientAdapter(Activity a,IEnumerable<Client> clients)
 		{
 			allclient = clients.OrderBy(s => s.name).ToList();
 			partial = null;
@@ -32,7 +32,7 @@ namespace NavigationDrawer
 			}
 		}
 
-		public client getClientFromPos(int position)
+		public Client getClientFromPos(int position)
 		{
 			return allclient[position];
 		}
@@ -76,7 +76,7 @@ namespace NavigationDrawer
 		}
 
 
-		public override client this[int position]
+		public override Client this[int position]
 		{
 			get { return allclient[position]; }
 		}
@@ -95,7 +95,7 @@ namespace NavigationDrawer
 			protected override FilterResults PerformFiltering(ICharSequence constraint)
 			{
 				var returnObj = new FilterResults();
-				var results = new List<client>();
+				var results = new List<Client>();
 				if (adapter.partial == null)
 					adapter.partial = adapter.allclient;
 
@@ -125,7 +125,7 @@ namespace NavigationDrawer
 			{
 				using (var values = results.Values)				
 					adapter.allclient = values.ToArray<Object>()
-						.Select(r => r.ToNetObject<client>()).ToList();
+						.Select(r => r.ToNetObject<Client>()).ToList();
 						
 				adapter.NotifyDataSetChanged();
 				constraint.Dispose();
@@ -133,7 +133,7 @@ namespace NavigationDrawer
 			}
 
 			// Return true if the client matches all of the query tokens of the constraint
-            private bool QueryClient(client c, string query)
+            private bool QueryClient(Client c, string query)
             {
                 string[] tokens = query.Trim().Split(' ');
                 foreach (string q in tokens)
@@ -148,7 +148,7 @@ namespace NavigationDrawer
             }
 
 			// Helper function to check the client fields for query string
-            private bool QueryTokenClient(client c, string query)
+            private bool QueryTokenClient(Client c, string query)
             {
 				return ((c.name != null && c.name.ToLower().Contains(query)) 
 					|| (c.contactName != null && c.contactName.ToLower().Contains(query)) 

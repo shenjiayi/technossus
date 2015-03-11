@@ -2,7 +2,7 @@
 
 namespace NavigationDrawer
 {
-	public class employee
+	public class Employee
 	{
 		public long id { get; set; }
 		public string photo{ get; set; }
@@ -10,7 +10,7 @@ namespace NavigationDrawer
 		public DateTime available{get;set;}
 		public string technology{ get ; set; }
 
-		public employee(long id, string photo,string name, string available,string technology)
+		public Employee(long id, string photo,string name, string available,string technology)
 		{
 			this.id = id;
 			this.photo = photo;

@@ -19,9 +19,9 @@ namespace NavigationDrawer
 		public const string ARG_NUMBER = "id_number";
 		SearchView _searchView;
 		PeopleAdapter PeopleAdapter;
-		List<employee> allemployee;
+		List<Employee> allemployee;
 
-		public PeopleFragment(List<employee> data){
+		public PeopleFragment(List<Employee> data){
 			allemployee = data;
 		}
 

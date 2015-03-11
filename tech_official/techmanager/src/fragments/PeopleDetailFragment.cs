@@ -11,9 +11,9 @@ namespace NavigationDrawer
 {
 	public class PeopleDetailFragment : Fragment
 	{
-        private readonly employee e;
+        private readonly Employee e;
 
-		public PeopleDetailFragment(employee e)
+		public PeopleDetailFragment(Employee e)
 		{
             this.e = e;
 		}

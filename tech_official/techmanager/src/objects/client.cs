@@ -1,6 +1,6 @@
 ﻿namespace NavigationDrawer
 {
-	public class client
+	public class Client
 	{
 		public long id { get; set; }
 		public string photo{ get; set; }
@@ -8,7 +8,7 @@
 		public string contactName{ get; set; }
 		public string contactEmail{get;set;}
 
-		public client(long id, string photo,string name,string contactName,string contactEmail)
+		public Client(long id, string photo,string name,string contactName,string contactEmail)
 		{
 			this.id = id;
 			this.photo = photo;
@@ -17,7 +17,7 @@
 			this.contactEmail = contactEmail;
 		}
 
-		public client(client prev)
+		public Client(Client prev)
 		{
 			id = prev.id;
 			photo = prev.photo;

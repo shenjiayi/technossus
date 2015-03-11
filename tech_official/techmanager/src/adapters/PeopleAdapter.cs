@@ -11,13 +11,13 @@ using Object = Java.Lang.Object;
 
 namespace NavigationDrawer
 {
-	public class PeopleAdapter:BaseAdapter<employee>,IFilterable
+	public class PeopleAdapter:BaseAdapter<Employee>,IFilterable
 	{
-		List<employee> allemployee;
-		List<employee> partial;
+		List<Employee> allemployee;
+		List<Employee> partial;
 		Activity activity; 
 
-		public PeopleAdapter(Activity a, IEnumerable<employee> data)
+		public PeopleAdapter(Activity a, IEnumerable<Employee> data)
 		{
 			allemployee = data.OrderBy(s => s.name).ToList();
 			partial = null;
@@ -32,7 +32,7 @@ namespace NavigationDrawer
 			}
 		}
 
-        public employee GetEmployeeFromPos(int position)
+        public Employee GetEmployeeFromPos(int position)
         {
             return allemployee[position];
         }
@@ -76,7 +76,7 @@ namespace NavigationDrawer
 		}
 
 
-		public override employee this[int position]
+		public override Employee this[int position]
 		{
 			get { return allemployee[position]; }
 		}
@@ -95,7 +95,7 @@ namespace NavigationDrawer
 			protected override FilterResults PerformFiltering(ICharSequence constraint)
 			{
 				var returnObj = new FilterResults();
-				var results = new List<employee>();
+				var results = new List<Employee>();
 				if (adapter.partial == null)
 					adapter.partial = adapter.allemployee;
 
@@ -123,7 +123,7 @@ namespace NavigationDrawer
 			{
 				using (var values = results.Values)				
 					adapter.allemployee = values.ToArray<Object>()
-						.Select(r => r.ToNetObject<employee>()).ToList();
+						.Select(r => r.ToNetObject<Employee>()).ToList();
 						
 				adapter.NotifyDataSetChanged();
 				constraint.Dispose();
@@ -131,7 +131,7 @@ namespace NavigationDrawer
 			}
 
             // Overall Query method, returns list of employee that satisfies all tokens of query
-            private bool QueryEmployee(employee e, string query)
+            private bool QueryEmployee(Employee e, string query)
             {
                 string[] tokens = query.Trim().Split(' ');
                 foreach (string q in tokens)
@@ -146,7 +146,7 @@ namespace NavigationDrawer
                 return true;
             }
 
-            private bool QueryTokenEmployee(employee e, string query)
+            private bool QueryTokenEmployee(Employee e, string query)
             {
 				return ((e.name != null && e.name.ToLower().Contains(query))
 					|| (e.technology !=null && e.technology.ToLower().Contains(query))
