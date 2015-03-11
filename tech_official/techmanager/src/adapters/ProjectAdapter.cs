@@ -19,23 +19,23 @@ namespace NavigationDrawer
 {
 	public class ProjectAdapter:BaseAdapter<project>,IFilterable
 	{
-		private List<project> _allproject;
-		private List<project> _partial;
-		private Activity _activity;
-
+		private List<project> allproject;
+		private List<project> partial;
+		private Activity activity;
 
 
 		public ProjectAdapter(Activity a,IEnumerable<project> project)
 		{
-			_allproject = project.OrderBy(s => s.name).ToList();
-			_activity = a;
+			allproject = project.OrderBy(s => s.name).ToList();
+			partial = null;
+			activity = a;
 
 			Filter = new ProjectFilter(this);
 		}
 
 		public override int Count {
 			get {
-				return _allproject.Count;
+				return allproject.Count;
 			}
 		}
 
@@ -51,21 +51,20 @@ namespace NavigationDrawer
 
 		public override View GetView (int position, View convertView, ViewGroup parent)
 		{
-			var view = convertView ?? _activity.LayoutInflater.Inflate (Resource.Layout.ProjectLayout, parent, false);
+			var view = convertView ?? activity.LayoutInflater.Inflate (Resource.Layout.ProjectLayout, parent, false);
 			var name = view.FindViewById<TextView> (Resource.Id.name);
 			var ClientName = view.FindViewById<TextView> (Resource.Id.clientName);
 
-			name.Text = _allproject [position].name;
-			ClientName.Text = "Client: "+ _allproject [position].client;
+			name.Text = allproject [position].name;
+			ClientName.Text = "Client: "+ allproject [position].client;
 
 			return view;
 
 		}
-
-
+			
 		public override project this[int position]
 		{
-			get { return _allproject[position]; }
+			get { return allproject[position]; }
 		}
 
 
@@ -74,37 +73,37 @@ namespace NavigationDrawer
 
 		private class ProjectFilter : Filter
 		{
-			private readonly ProjectAdapter _adapter;
+			private readonly ProjectAdapter adapter;
+
 			public ProjectFilter(ProjectAdapter adapter)
 			{
-				_adapter = adapter;
+				this.adapter = adapter;
 			}
 
 			protected override FilterResults PerformFiltering(ICharSequence constraint)
 			{
 				var returnObj = new FilterResults();
 				var results = new List<project>();
-				if (_adapter._partial == null)
-					_adapter._partial = _adapter._allproject;
+
+				if (adapter.partial == null)
+					adapter.partial = adapter.allproject;
 
 				if (constraint == null) return returnObj;
 
-				if (_adapter._partial != null && _adapter._partial.Any())
+				if (adapter.partial != null && adapter.partial.Any())
 				{
                     string lowerQuery = constraint.ToString().ToLower();
 
 					// Compare constraint to all names lowercased. 
 					// It they are contained they are added to results.
 					results.AddRange(
-						_adapter._partial.Where(
+						adapter.partial.Where(
                             project => QueryProject(project, lowerQuery)
                         ));
 				}
 
-				// Nasty piece of .NET to Java wrapping, be careful with this!
 				returnObj.Values = FromArray(results.Select(r => r.ToJavaObject()).ToArray());
 				returnObj.Count = results.Count;
-
 				constraint.Dispose();
 
 				return returnObj;
@@ -113,13 +112,10 @@ namespace NavigationDrawer
 			protected override void PublishResults(ICharSequence constraint, FilterResults results)
 			{
 				using (var values = results.Values)				
-					_adapter._allproject = values.ToArray<Object>()
+					adapter.allproject = values.ToArray<Object>()
 						.Select(r => r.ToNetObject<project>()).ToList();
-
-
-				_adapter.NotifyDataSetChanged();
-
-				// Don't do this and see GREF counts rising
+						
+				adapter.NotifyDataSetChanged();
 				constraint.Dispose();
 				results.Dispose();
 			}
