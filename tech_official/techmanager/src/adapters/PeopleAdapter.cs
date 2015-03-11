@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Provider;
@@ -18,10 +13,9 @@ namespace NavigationDrawer
 {
 	public class PeopleAdapter:BaseAdapter<employee>,IFilterable
 	{
-		private List<employee> allemployee;
-		private List<employee> partial;
-		private Activity activity; 
-
+		List<employee> allemployee;
+		List<employee> partial;
+		Activity activity; 
 
 		public PeopleAdapter(Activity a, IEnumerable<employee> data)
 		{
@@ -43,7 +37,7 @@ namespace NavigationDrawer
             return allemployee[position];
         }
 
-		public override Java.Lang.Object GetItem (int position)
+		public override Object GetItem (int position)
 		{
 			return null; // could wrap a Contact in a Java.Lang.Object to return it here if needed
 		}

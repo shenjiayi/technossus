@@ -1,6 +1,4 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
@@ -15,15 +13,12 @@ using Fragment = Android.App.Fragment;
 
 namespace NavigationDrawer
 {
-	public class PeopleFragment:Android.App.ListFragment
+	public class PeopleFragment:ListFragment
 	{
 
 		public const string ARG_NUMBER = "id_number";
-
-		private SearchView _searchView;
-
-		private PeopleAdapter PeopleAdapter;
-
+		SearchView _searchView;
+		PeopleAdapter PeopleAdapter;
 		List<employee> allemployee;
 
 		public PeopleFragment(List<employee> data){
@@ -35,7 +30,6 @@ namespace NavigationDrawer
 		{
 			View rootView = inflater.Inflate (Resource.Layout.people, container, false);
 			ListView employeelist;
-
 			employeelist = rootView.FindViewById<ListView> (Resource.Id.employeelist);
 			PeopleAdapter = new PeopleAdapter (this.Activity, allemployee);
 			employeelist.Adapter = PeopleAdapter;
@@ -57,25 +51,19 @@ namespace NavigationDrawer
 		public override void OnCreateOptionsMenu (IMenu menu, MenuInflater inflater)
 		{
 			inflater.Inflate(Resource.Menu.navigation_drawer, menu);
-
 			var item = menu.FindItem(Resource.Id.action_search);
-
 			var searchView = MenuItemCompat.GetActionView(item);
 			_searchView = searchView.JavaCast<SearchView>();
 
 			_searchView.QueryTextChange += (s, e) => PeopleAdapter.Filter.InvokeFilter(e.NewText);
-
 			_searchView.QueryTextSubmit += (s, e) =>
 			{
 				// Handle enter/search button on keyboard here
 				Toast.MakeText(this.Activity, "Searched for: " + e.Query, ToastLength.Short).Show();
 				e.Handled = true;
 			};
-
 			MenuItemCompat.SetOnActionExpandListener(item, new SearchViewExpandListener(PeopleAdapter));
-
 		}
-
 	}
 }
 

@@ -1,22 +1,12 @@
-﻿
-using System;
-using System.Linq;
+﻿using System;
 using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 
-
 //Ambiguities
 using Fragment = Android.App.Fragment;
-using System.Collections.Generic;
-
-
 
 namespace NavigationDrawer
 {

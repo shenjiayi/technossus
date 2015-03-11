@@ -1,5 +1,4 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Content.Res;
 using Android.Views;
 using Android.OS;
@@ -9,7 +8,6 @@ using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
 using System.Json;
 using System.Linq;
-
 
 //Ambiguities
 using Fragment = Android.App.Fragment;
@@ -26,14 +24,11 @@ namespace NavigationDrawer
 
 		private string mDrawerTitle;
 		//data here 
-
 		//make sure they are in alphebetical order for now
 		List<employee> allpeople;
 		List<employee> peopelpartial;
 		List<client> allclient;
 		List<client> clientpartial;
-
-
 
 
 		//project data
@@ -61,8 +56,7 @@ namespace NavigationDrawer
 			new project (0, "Mobile App", "Dell", "2015/02/24", "2015/05/23", teamMember2, technology2,""),
 			new project (0, "Web Design", "SpaceX","2014/02/24", "2015/07/23", teamMember3, technology3,"Design a website")
 		};
-
-
+			
 		List<post> allpost = new List<post> () {
 			new post (0, null,"Added Carrie to the project", "Peter Anteater", "Web Design", "SpaceX", "2014/2/12"),
 			new post (0, null,"Added James to the project", "Peter Anteater", "Mobile App", "Dell", "2014/2/12"),
@@ -74,8 +68,6 @@ namespace NavigationDrawer
 		};
 
 
-
-
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
 
@@ -83,7 +75,6 @@ namespace NavigationDrawer
 			SetContentView (Resource.Layout.activity_navigation_drawer);
 
 			mDrawerTitle = this.Title;
-			//			mMenuTitles = this.Resources.GetStringArray (Resource.Array.menu_array);
 			mDrawerLayout = FindViewById<DrawerLayout> (Resource.Id.drawer_layout);
 			mDrawerList = FindViewById<RecyclerView> (Resource.Id.left_drawer);
 
@@ -106,7 +97,6 @@ namespace NavigationDrawer
 
 			mDrawerList.SetAdapter (new MenuAdapter(menu_item,this));
 
-;
 			// enable ActionBar app icon to behave as menu_item toggle nav drawer
 			this.ActionBar.SetDisplayHomeAsUpEnabled (true);
 			this.ActionBar.SetHomeButtonEnabled (true);
@@ -185,7 +175,6 @@ namespace NavigationDrawer
 
 		private void selectItem (int position)
 		{
-
             // Load Mock Data
 			allpeople = LoadPeopleData("ALL");
 			peopelpartial = LoadPeopleData("PARTIAL");
@@ -246,7 +235,7 @@ namespace NavigationDrawer
 			}
 			else if (position == allproject.Count + 4) 
 			{
-					base.OnBackPressed ();
+				StartActivity (typeof(MainActivity));
 			}
 
 		}

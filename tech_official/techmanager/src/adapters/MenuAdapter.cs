@@ -1,13 +1,5 @@
 ﻿
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V7.Widget;
@@ -16,8 +8,8 @@ namespace NavigationDrawer
 {
 	public class MenuAdapter : RecyclerView.Adapter
 	{
-		private String[] mDataset;
-		private OnItemClickListener mListener;
+	    String[] mDataset;
+		OnItemClickListener mListener;
 		//Associated Objects
 		public interface OnItemClickListener{
 			void OnClick(View view, int position);
@@ -50,10 +42,8 @@ namespace NavigationDrawer
 			holder.textView.Click += (object sender, EventArgs args) => {
 				mListener.OnClick((View) sender, position);
 			};
-
 		}
-
-
+			
 		public override int ItemCount {
 			get {
 				return mDataset.Length;

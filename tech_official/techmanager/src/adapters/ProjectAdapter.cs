@@ -1,28 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.Provider;
 using Java.Lang;
 using Object = Java.Lang.Object;
-
 
 
 namespace NavigationDrawer
 {
 	public class ProjectAdapter:BaseAdapter<project>,IFilterable
 	{
-		private List<project> allproject;
-		private List<project> partial;
-		private Activity activity;
-
+		List<project> allproject;
+		List<project> partial;
+		Activity activity;
 
 		public ProjectAdapter(Activity a,IEnumerable<project> project)
 		{
@@ -39,7 +30,7 @@ namespace NavigationDrawer
 			}
 		}
 
-		public override Java.Lang.Object GetItem (int position)
+		public override Object GetItem (int position)
 		{
 			return null; // could wrap a Contact in a Java.Lang.Object to return it here if needed
 		}
@@ -93,9 +84,7 @@ namespace NavigationDrawer
 				if (adapter.partial != null && adapter.partial.Any())
 				{
                     string lowerQuery = constraint.ToString().ToLower();
-
-					// Compare constraint to all names lowercased. 
-					// It they are contained they are added to results.
+				
 					results.AddRange(
 						adapter.partial.Where(
                             project => QueryProject(project, lowerQuery)

@@ -1,6 +1,4 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
@@ -8,8 +6,6 @@ using Android.OS;
 using Android.Support.V4.View;
 using System.Collections.Generic;
 using SearchView = Android.Widget.SearchView;
-
-
 
 //Ambiguities
 using Fragment = Android.App.Fragment;
@@ -20,24 +16,16 @@ namespace NavigationDrawer
 	public class ProjectFragment :Android.App.ListFragment
 	{
 		public const string ARG_NUMBER = "id_number";
-
-
-
 		private SearchView _searchView;
-
 		private ProjectAdapter ProjectAdapter;
-
 		List<project> allproject;
-
 		List<post> allpost;
 
-
-		public ProjectFragment(List<project> data, List<post> data1){
+		public ProjectFragment(List<project> data, List<post> data1)
+		{
 			allproject = data;
 			allpost = data1;
 		}
-
-
 
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -54,14 +42,11 @@ namespace NavigationDrawer
 		public override void OnCreateOptionsMenu (IMenu menu, MenuInflater inflater)
 		{
 			inflater.Inflate(Resource.Menu.navigation_drawer, menu);
-
 			var item = menu.FindItem(Resource.Id.action_search);
-
 			var searchView = MenuItemCompat.GetActionView(item);
 			_searchView = searchView.JavaCast<SearchView>();
 
 			_searchView.QueryTextChange += (s, e) => ProjectAdapter.Filter.InvokeFilter(e.NewText);
-
 			_searchView.QueryTextSubmit += (s, e) =>
 			{
 				// Handle enter/search button on keyboard here
@@ -70,13 +55,10 @@ namespace NavigationDrawer
 			};
 
 			MenuItemCompat.SetOnActionExpandListener(item, new SearchViewExpandListener(ProjectAdapter));
-
 		}
 
 		public override void OnListItemClick (ListView l, View v, int position, long id)
 		{
-
-
 			base.OnListItemClick (l, v, position, id);
 			List<post> data;
 			Activity.ActionBar.RemoveAllTabs ();
@@ -86,7 +68,6 @@ namespace NavigationDrawer
 			addTab ("Dashboard", new PostFragment (data));
 			addTab ("Teammate", new PeopleFragment (allproject[position].teamMember));
 			Activity.Title =allproject[position].name;
-
 		}
 			
 		void addTab (string tabText, Fragment view)
@@ -96,7 +77,7 @@ namespace NavigationDrawer
 			tab.TabSelected += delegate(object sender, ActionBar.TabEventArgs e) {
 				e.FragmentTransaction.Replace(Resource.Id.content_frame,view);
 			};
-			this.Activity.ActionBar.AddTab (tab);
+			Activity.ActionBar.AddTab (tab);
 		}
 
 		public List<post> filterpost (string projectname, List<post> allpost)

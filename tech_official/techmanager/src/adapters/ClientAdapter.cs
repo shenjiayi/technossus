@@ -16,7 +16,6 @@ namespace NavigationDrawer
 		private List<client> partial;
 		private Activity activity;
 
-
 		public ClientAdapter(Activity a,IEnumerable<client> clients)
 		{
 			allclient = clients.OrderBy(s => s.name).ToList();

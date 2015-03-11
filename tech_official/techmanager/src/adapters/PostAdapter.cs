@@ -1,19 +1,16 @@
 ﻿using Android.App;
 using Android.Views;
 using Android.Widget;
-
 using Fragment = Android.App.Fragment;
 using System.Collections.Generic;
 
 
 namespace NavigationDrawer
 {
-
 	public class PostAdapter:BaseAdapter
 	{
 		private readonly List<post> allposts;
 		private readonly Activity activity;
-
 
 		public PostAdapter(Activity a,List<post> data)
 		{
