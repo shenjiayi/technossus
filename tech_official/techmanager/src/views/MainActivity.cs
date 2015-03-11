@@ -60,6 +60,7 @@ namespace NavigationDrawer
             if (invalidRequest)
             {
                 Toast.MakeText(this, "Invalid account! Please try again.", ToastLength.Long).Show();
+				BtnLogin.Text = "Log in";
             }
 
 		}

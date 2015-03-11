@@ -80,7 +80,6 @@
     <Compile Include="src\util\JsonLoader.cs" />
     <Compile Include="src\adapters\ClientAdapter.cs" />
     <Compile Include="src\adapters\MenuAdapter.cs" />
-    <Compile Include="src\adapters\PeopleAdapter.cs" />
     <Compile Include="src\adapters\PostAdapter.cs" />
     <Compile Include="src\adapters\ProjectAdapter.cs" />
     <Compile Include="src\util\ObjectExtensions.cs" />
@@ -89,6 +88,7 @@
     <Compile Include="src\objects\Employee.cs" />
     <Compile Include="src\objects\Post.cs" />
     <Compile Include="src\objects\Project.cs" />
+    <Compile Include="src\adapters\PeopleAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AndroidManifest.xml" />
@@ -112,7 +112,6 @@
     <AndroidResource Include="Resources\drawable\drawer_shadow.9.png" />
     <AndroidResource Include="Resources\drawable\ic_drawer.png" />
     <AndroidResource Include="Resources\drawable\tile.9.png" />
-    <AndroidResource Include="Resources\drawable\logo.png" />
     <AndroidResource Include="Resources\drawable\contactImage.png" />
     <AndroidResource Include="Resources\drawable\sample_dashboard_item_background.9.png" />
     <AndroidResource Include="Resources\layout\client.axml">
@@ -120,8 +119,6 @@
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_planet.xml" />
     <AndroidResource Include="Resources\layout\project.axml" />
-    <AndroidResource Include="Resources\drawable\ic_launcher_tcube.png" />
-    <AndroidResource Include="Resources\drawable\Background.png" />
     <AndroidResource Include="Resources\layout\post.axml" />
     <AndroidResource Include="Resources\layout\ProjectInfo.axml" />
     <AndroidResource Include="Resources\layout\EmployeeLayout.axml" />
@@ -133,6 +130,10 @@
     <AndroidResource Include="Resources\drawable\TechEmblem.png" />
     <AndroidResource Include="Resources\drawable\ic_launcher2.png" />
     <AndroidResource Include="Resources\drawable\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable\people1.png" />
+    <AndroidResource Include="Resources\drawable\people2.png" />
+    <AndroidResource Include="Resources\drawable\people3.png" />
+    <AndroidResource Include="Resources\drawable\people4.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\clients.json" />

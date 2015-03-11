@@ -8,6 +8,7 @@ using Android.Provider;
 
 using Java.Lang;
 using Object = Java.Lang.Object;
+using System;
 
 namespace NavigationDrawer
 {
@@ -61,7 +62,23 @@ namespace NavigationDrawer
 			if (allemployee [position].photo == null) 
 			{
 				contactImage = view.FindViewById<ImageView> (Resource.Id.picture);
-				contactImage.SetImageResource (Resource.Drawable.contactImage);
+				Random temp = new Random ();
+				int index = temp.Next (1, 6);
+				if (index == 1) {
+					contactImage.SetImageResource (Resource.Drawable.contactImage);
+				}
+				if (index == 2) {
+					contactImage.SetImageResource (Resource.Drawable.people1);
+				}
+				if (index == 3 ){
+					contactImage.SetImageResource (Resource.Drawable.people2);
+				}
+				if (index == 4 ){
+					contactImage.SetImageResource (Resource.Drawable.people3);
+				}
+				if (index == 5){
+					contactImage.SetImageResource (Resource.Drawable.people4);
+				}
 
 			} 
 			else 
