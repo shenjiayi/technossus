@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Provider;
@@ -17,24 +12,26 @@ namespace NavigationDrawer
 {
 	public class ClientAdapter:BaseAdapter<client>,IFilterable
 	{
-		private List<client> _allclient;
-		private List<client> _partial;
-		private Activity _activity;
+		private List<client> allclient;
+		private List<client> partial;
+		private Activity activity;
 
 
 
 		public ClientAdapter(Activity a,IEnumerable<client> clients)
 		{
-			_allclient = clients.OrderBy(s => s.name).ToList();
-			_activity = a;
+			allclient = clients.OrderBy(s => s.name).ToList();
+			partial = null;
+			activity = a;
 
-			Filter = new CilentFilter(this);
+			Filter = new ClientFilter(this);
 		}
 
 
 		public override int Count {
-			get {
-				return _allclient.Count;
+			get 
+			{
+				return allclient.Count;
 			}
 		}
 
@@ -50,28 +47,27 @@ namespace NavigationDrawer
 
 		public override View GetView (int position, View convertView, ViewGroup parent)
 		{
-			var view = convertView ?? _activity.LayoutInflater.Inflate (Resource.Layout.ClientLayout, parent,false);
+			var view = convertView ?? activity.LayoutInflater.Inflate (Resource.Layout.ClientLayout, parent,false);
 			var name = view.FindViewById<TextView> (Resource.Id.name);
 
 			var contactName = view.FindViewById<TextView> (Resource.Id.contactName);
 			var contactEmail = view.FindViewById<TextView> (Resource.Id.contactEmail);
 			var contactImage = view.FindViewById<ImageView> (Resource.Id.picture);
 
-			name.Text = _allclient [position].name;
-			contactName.Text = "Contact: "+ _allclient [position].contactName;
-			contactEmail.Text = "Email: " +_allclient [position].contactEmail;
+			name.Text = allclient [position].name;
+			contactName.Text = "Contact: "+ allclient [position].contactName;
+			contactEmail.Text = "Email: " + allclient [position].contactEmail;
 
-			if (_allclient [position].photo == null) {
-
+			if (allclient [position].photo == null)
+			{
 				contactImage = view.FindViewById<ImageView> (Resource.Id.picture);
 				contactImage.SetImageResource (Resource.Drawable.contactImage);
 
-			} else {
-				//not sure about this part
-
-				var contactUri = ContentUris.WithAppendedId (ContactsContract.Contacts.ContentUri, _allclient [position].id);
+			} 
+			else 
+			{
+				var contactUri = ContentUris.WithAppendedId (ContactsContract.Contacts.ContentUri, allclient [position].id);
 				var contactPhotoUri = Android.Net.Uri.WithAppendedPath (contactUri, Contacts.Photos.ContentDirectory);
-
 				contactImage.SetImageURI (contactPhotoUri);
 			}
 			return view;
@@ -80,36 +76,36 @@ namespace NavigationDrawer
 
 		public override client this[int position]
 		{
-			get { return _allclient[position]; }
+			get { return allclient[position]; }
 		}
 
 		public Filter Filter { get; private set; }
 
 
-		private class CilentFilter : Filter
+		private class ClientFilter : Filter
 		{
-			private readonly ClientAdapter _adapter;
-			public CilentFilter(ClientAdapter adapter)
+			private readonly ClientAdapter adapter;
+			public ClientFilter(ClientAdapter adapter)
 			{
-				_adapter = adapter;
+				this.adapter = adapter;
 			}
 
 			protected override FilterResults PerformFiltering(ICharSequence constraint)
 			{
 				var returnObj = new FilterResults();
 				var results = new List<client>();
-				if (_adapter._partial == null)
-					_adapter._partial = _adapter._allclient;
+				if (adapter.partial == null)
+					adapter.partial = adapter.allclient;
 
 				if (constraint == null) return returnObj;
 
-				if (_adapter._partial != null && _adapter._partial.Any())
+				if (adapter.partial != null && adapter.partial.Any())
 				{
                     string lowerQuery = constraint.ToString().ToLower();
 
 					// Compare constraint to all fields of client
 					results.AddRange(
-						_adapter._partial.Where(
+						adapter.partial.Where(
                             client => QueryClient(client, lowerQuery)
                         ));
 				}
@@ -126,17 +122,15 @@ namespace NavigationDrawer
 			protected override void PublishResults(ICharSequence constraint, FilterResults results)
 			{
 				using (var values = results.Values)				
-					_adapter._allclient = values.ToArray<Object>()
+					adapter.allclient = values.ToArray<Object>()
 						.Select(r => r.ToNetObject<client>()).ToList();
-
-
-				_adapter.NotifyDataSetChanged();
-
-				// Don't do this and see GREF counts rising
+						
+				adapter.NotifyDataSetChanged();
 				constraint.Dispose();
 				results.Dispose();
 			}
 
+			// Return true if the client matches all of the query tokens of the constraint
             private bool QueryClient(client c, string query)
             {
                 string[] tokens = query.Trim().Split(' ');
@@ -151,7 +145,7 @@ namespace NavigationDrawer
                 return true;
             }
 
-
+			// Helper function to check the client fields for query string
             private bool QueryTokenClient(client c, string query)
             {
 				return ((c.name != null && c.name.ToLower().Contains(query)) 
