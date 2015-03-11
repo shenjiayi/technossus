@@ -28,4 +28,5 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_search">search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <style name="AppTheme" parent="android:Theme.Material.Light"></style>
 </resources>
