@@ -1,12 +1,7 @@
 ﻿using System;
-
 using Android.App;
-using Android.Content;
 using Android.Content.Res;
-using Android.Runtime;
 using Android.Views;
-using Android.Widget;
-
 using Android.OS;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
@@ -30,13 +25,7 @@ namespace NavigationDrawer
 		private ActionBarDrawerToggle mDrawerToggle;
 
 		private string mDrawerTitle;
-		private String[] mMenuTitles;
-
 		//data here 
-
-        // Use this to find relevant data for user.  For testing purposes
-        private readonly string default_user = "John Doe";
-
 
 		//make sure they are in alphebetical order for now
 		List<employee> allpeople;
@@ -176,11 +165,13 @@ namespace NavigationDrawer
 		{
 			// The action bar home/up action should open or close the drawer.
 			// ActionBarDrawerToggle will take care of this.
-			if (mDrawerToggle.OnOptionsItemSelected (item)) {
+			if (mDrawerToggle.OnOptionsItemSelected (item)) 
+			{
 				return true;
 			}
 			// Handle action buttons
-			switch (item.ItemId) {
+			switch (item.ItemId)
+			{
 			default:
 				return false;
 			}
@@ -203,7 +194,8 @@ namespace NavigationDrawer
 
 			List<post> data;
 
-			if (position == 0) {
+			if (position == 0) 
+			{
 				ActionBar.RemoveAllTabs ();
 				ActionBar.NavigationMode = ActionBarNavigationMode.Standard;
 				var fragmentManger = this.FragmentManager;
@@ -214,8 +206,8 @@ namespace NavigationDrawer
 				Title = "Dashboard";
 				mDrawerLayout.CloseDrawer (mDrawerList);
 			} 
-
-			else if (position > 0 && position < allproject.Count + 1) {
+			else if (position > 0 && position < allproject.Count + 1) 
+			{
 				ActionBar.RemoveAllTabs ();
 				this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
 				data = filterpost (allproject [position - 1].name, LoadDashProjectData());
@@ -225,34 +217,37 @@ namespace NavigationDrawer
 				Title = allproject [position - 1].name;
 				mDrawerLayout.CloseDrawer (mDrawerList);
 			}
-
-			else if (position == allproject.Count + 1) {
+			else if (position == allproject.Count + 1)
+			{
 					ActionBar.RemoveAllTabs ();
 					ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
 					addTab ("All people", new PeopleFragment (allpeople));
 					addTab ("Teammates", new PeopleFragment (peopelpartial));
 					Title = "People";
 					mDrawerLayout.CloseDrawer (mDrawerList);
-				}
-			else if (position == allproject.Count + 2) {
+			}
+			else if (position == allproject.Count + 2) 
+			{
 					ActionBar.RemoveAllTabs ();
 					this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
 					addTab ("All Clients", new ClientFragment (allclient));
 					addTab ("Your Clients", new ClientFragment (clientpartial));
 					Title = "Clients";
 					mDrawerLayout.CloseDrawer (mDrawerList);
-				}
-			else if (position == allproject.Count + 3) {
+			}
+			else if (position == allproject.Count + 3) 
+			{
 					ActionBar.RemoveAllTabs ();
 					this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
 					addTab ("All Project", new ProjectFragment (allproject,allpost));
 					addTab ("Your Project", new ProjectFragment (allproject,allpost));
 					Title = "Projects";
 					mDrawerLayout.CloseDrawer (mDrawerList);
-				}
-			else if (position == allproject.Count + 4) {
+			}
+			else if (position == allproject.Count + 4) 
+			{
 					base.OnBackPressed ();
-				}
+			}
 
 		}
 
@@ -293,7 +288,6 @@ namespace NavigationDrawer
 
 		protected override void OnTitleChanged (Java.Lang.ICharSequence title, Android.Graphics.Color color)
 		{
-			//base.OnTitleChanged (title, color);
 			this.ActionBar.Title = title.ToString ();
 		}
 
